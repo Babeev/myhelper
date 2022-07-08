@@ -1,6 +1,5 @@
 {
-  "name": "myhelper",
-  "homepage": "https://babeev.github.io/",
+  "homepage": "https://babeev.github.io/myhelper/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

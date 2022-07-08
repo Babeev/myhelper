@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import { NotFound } from './features/404'
 import { Account } from './features/account'
 import { Login } from './features/auth/login'
@@ -11,7 +11,7 @@ export const App = () => {
   const isLoggedIn = false
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />}>
           <Route index element={<Services isLoggedIn={false} />} />
@@ -31,6 +31,6 @@ export const App = () => {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }

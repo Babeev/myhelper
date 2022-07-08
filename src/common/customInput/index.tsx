@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, FocusEvent } from 'react'
+import { ChangeEvent, useState, FocusEvent, FormEvent } from 'react'
 import { GRAY_COLOR, DANGER_COLOR } from 'common/constants'
 import styled from 'styled-components'
 
@@ -12,7 +12,7 @@ interface CustomInputProps {
   height?: string
   onChange?: (value: string) => void
   onFocus?: (event: FocusEvent<HTMLInputElement>) => void
-  onBlur?: () => void
+  onBlur?: (value: string) => void
 }
 
 const InputContainer = styled.div<{
@@ -106,11 +106,11 @@ export const CustomInput = ({
     onFocus?.(event)
   }
 
-  const onBlurHandler = () => {
+  const onBlurHandler = (event: FormEvent<HTMLInputElement>) => {
     setFocused(false)
 
     if (!error) {
-      onBlur?.()
+      onBlur?.(event.currentTarget.value)
     }
   }
 

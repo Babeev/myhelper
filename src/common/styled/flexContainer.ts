@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const FlexContainer = styled.div<{
+  position?: string
   column?: boolean
   margin?: string
   padding?: string
@@ -9,6 +10,7 @@ export const FlexContainer = styled.div<{
   width?: string
   height?: string
 }>`
+  position: ${({ position }) => position || 'static'};
   display: flex;
   flex-direction: ${({ column }) => (column ? 'column' : 'row')};
   margin: ${({ margin }) => margin || '0'};

@@ -3,16 +3,26 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const accountSlice = createSlice({
   name: 'accountSlice',
   initialState: {
-    name: '',
+    fistName: '',
+    lastName: '',
+    patronymic: '',
   },
   reducers: {
-    setAccount(state, action: PayloadAction<{ name: string }>) {
-      state.name = action.payload.name
+    setFirstName(state, action: PayloadAction<string>) {
+      state.fistName = action.payload
+    },
+
+    setLastName(state, action: PayloadAction<string>) {
+      state.lastName = action.payload
+    },
+
+    setPatronymic(state, action: PayloadAction<string>) {
+      state.patronymic = action.payload
     },
   },
 })
 
 const { actions, reducer } = accountSlice
 
-export const { setAccount } = actions
+export const { setFirstName, setLastName, setPatronymic } = actions
 export default reducer

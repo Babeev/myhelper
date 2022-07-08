@@ -53,7 +53,7 @@ export const Login = () => {
   }
 
   return (
-    <FlexContainer margin="3rem auto auto auto" width="50%">
+    <FlexContainer margin="auto" width="50%">
       <CustomForm validate={validate} width="100%">
         <CustomInput
           label="Имя"

@@ -3,7 +3,7 @@ import { api } from 'app/api'
 interface SignupRequest {
   firstName: string
   lastName: string
-  patronymic: string
+  middleName: string
 }
 
 const authEndpoint = api.injectEndpoints({

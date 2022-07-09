@@ -1,5 +1,6 @@
-import { useAppSelector } from 'app/hooks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { FlexContainer } from 'common/styled/flexContainer'
+import { setLoggedIn } from 'features/account/accountSlice'
 import { ReturnButton } from 'features/returnButton'
 import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -12,11 +13,13 @@ import { ThirdStage } from '../thirdStage'
 export const Signup = () => {
   const navigate = useNavigate()
 
+  const dispatch = useAppDispatch()
+
   const [stage, setStage] = useState(1)
 
   const firstName = useAppSelector((state) => state.account.fistName)
   const lastName = useAppSelector((state) => state.account.lastName)
-  const patronymic = useAppSelector((state) => state.account.patronymic)
+  const middleName = useAppSelector((state) => state.account.middleName)
 
   const [signup, { isLoading }] = useSignupMutation()
 
@@ -29,22 +32,27 @@ export const Signup = () => {
   }, [navigate, stage])
 
   const onSubmitSignupHandler = useCallback(async () => {
-    try {
-      const promise = signup({
-        firstName,
-        lastName,
-        patronymic,
-      }).unwrap()
+    const promise = signup({
+      firstName,
+      lastName,
+      middleName,
+    }).unwrap()
 
-      toast.promise(promise, {
-        pending: 'Загрузка...',
-        success: 'Регистрация прошла успешно',
-        error: 'Произошла ошибка',
+    toast.promise(promise, {
+      pending: 'Загрузка...',
+      success: 'Регистрация прошла успешно',
+      error: 'Произошла ошибка',
+    })
+
+    promise
+      .then(() => {
+        dispatch(setLoggedIn(true))
+        navigate('/services')
       })
-    } catch (e) {
-      console.log(e)
-    }
-  }, [signup, firstName, lastName, patronymic])
+      .catch((e) => {
+        console.log(e)
+      })
+  }, [signup, firstName, lastName, middleName, dispatch, navigate])
 
   return (
     <FlexContainer width="100%" height="100%" position="relative">

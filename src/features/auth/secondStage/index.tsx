@@ -42,6 +42,7 @@ export const SecondStage = ({ onSubmitHandler }: SecondStageProps) => {
         onChange={onChangeFirstNameHandler}
         error={numberError}
         margin="0 0 1rem 0"
+        cypressName="number"
       />
 
       <Button
@@ -51,6 +52,7 @@ export const SecondStage = ({ onSubmitHandler }: SecondStageProps) => {
         padding="0.5rem"
         disabled={!isFormValid}
         onClick={onSubmitHandler}
+        data-cy="nextStageButton"
       >
         Продолжить
       </Button>

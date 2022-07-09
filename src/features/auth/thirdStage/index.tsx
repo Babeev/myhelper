@@ -60,6 +60,7 @@ export const ThirdStage = ({ onSubmitHandler }: ThirdStageProps) => {
         onChange={onChangeCodeValue}
         error={codeError}
         margin="0 0 1rem 0"
+        cypressName="code"
       />
 
       {counter ? (
@@ -80,6 +81,7 @@ export const ThirdStage = ({ onSubmitHandler }: ThirdStageProps) => {
         disabled={!isFormValid}
         onClick={onSubmitHandler}
         width="auto"
+        data-cy="submitSignup"
       >
         Зарегистрироваться
       </Button>

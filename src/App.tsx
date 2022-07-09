@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useAppSelector } from 'app/hooks'
 import { NotFound } from './features/404'
 import { Account } from './features/account'
 import { Login } from './features/auth/login'
@@ -8,7 +9,7 @@ import { Service } from './features/service'
 import { Services } from './features/services'
 
 export const App = () => {
-  const isLoggedIn = false
+  const isLoggedIn = useAppSelector((state) => state.account.isLoggedIn)
 
   return (
     <BrowserRouter basename="myhelper">

@@ -5,7 +5,8 @@ const accountSlice = createSlice({
   initialState: {
     fistName: '',
     lastName: '',
-    patronymic: '',
+    middleName: '',
+    isLoggedIn: false,
   },
   reducers: {
     setFirstName(state, action: PayloadAction<string>) {
@@ -16,13 +17,17 @@ const accountSlice = createSlice({
       state.lastName = action.payload
     },
 
-    setPatronymic(state, action: PayloadAction<string>) {
-      state.patronymic = action.payload
+    setMiddleName(state, action: PayloadAction<string>) {
+      state.middleName = action.payload
+    },
+
+    setLoggedIn(state, action: PayloadAction<boolean>) {
+      state.isLoggedIn = action.payload
     },
   },
 })
 
 const { actions, reducer } = accountSlice
 
-export const { setFirstName, setLastName, setPatronymic } = actions
+export const { setFirstName, setLastName, setMiddleName, setLoggedIn } = actions
 export default reducer

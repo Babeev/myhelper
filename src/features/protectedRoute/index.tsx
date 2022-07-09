@@ -1,4 +1,4 @@
-import { memo, ReactElement } from 'react'
+import { memo, ReactElement, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -9,10 +9,14 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute = memo(
   ({ isLoggedIn, children }: ProtectedRouteProps): ReactElement => {
+    useEffect(() => {
+      if (!isLoggedIn) {
+        toast.error('Пожалуйста, войдите снова')
+      }
+    }, [isLoggedIn])
+
     if (isLoggedIn) {
       return <>{children}</>
-    } else {
-      toast.error('Пожалуйста, войдите снова')
     }
 
     return <Navigate to="/auth/login" replace />

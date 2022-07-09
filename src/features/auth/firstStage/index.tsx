@@ -1,6 +1,6 @@
 import { useState, useCallback, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PRIMARY_COLOR, GRAY_COLOR } from 'common/constants'
+import { PRIMARY_COLOR, GRAY_COLOR, BACKGROUND_COLOR } from 'common/constants'
 import { CustomForm } from 'common/customForm'
 import { CustomInput } from 'common/customInput'
 import { Button } from 'common/styled/button'
@@ -9,7 +9,7 @@ import { requiredField } from 'utils/validators'
 import {
   setFirstName,
   setLastName,
-  setPatronymic,
+  setMiddleName,
 } from 'features/account/accountSlice'
 import { useAppDispatch } from 'app/hooks'
 
@@ -35,8 +35,8 @@ export const FirstStage = memo(
     const [firstNameError, setFirstNameError] = useState<string | null>(null)
     const [lastNameValue, setLastNameValue] = useState<string | null>(null)
     const [lastNameError, setLastNameError] = useState<string | null>(null)
-    const [patronymicValue, setPatronymicValue] = useState<string | null>(null)
-    const [patronymicError, setPatronymicError] = useState<string | null>(null)
+    const [middleNameValue, setMiddleNameValue] = useState<string | null>(null)
+    const [middleNameError, setMiddleNameError] = useState<string | null>(null)
 
     const onChangeFirstNameHandler = useCallback((value: string) => {
       setFirstNameValue(value)
@@ -60,13 +60,13 @@ export const FirstStage = memo(
       [dispatch]
     )
 
-    const onChangePatronymicHandler = useCallback((value: string) => {
-      setPatronymicValue(value)
+    const onChangeMiddleNameHandler = useCallback((value: string) => {
+      setMiddleNameValue(value)
     }, [])
 
-    const onBlurPatronymicHandler = useCallback(
+    const onBlurMiddleNameHandler = useCallback(
       (value: string) => {
-        dispatch(setPatronymic(value))
+        dispatch(setMiddleName(value))
       },
       [dispatch]
     )
@@ -86,23 +86,23 @@ export const FirstStage = memo(
 
         setLastNameError(error || '')
       }
-      if (inputName === 'patronymic') {
+      if (inputName === 'middleName') {
         const error = requiredField(inputValue)
 
-        setPatronymicError(error || '')
+        setMiddleNameError(error || '')
       }
     }
 
     const areAllValuesValid = [
       firstNameError,
       lastNameError,
-      patronymicError,
+      middleNameError,
     ].every((value) => !value)
 
     const isAllValuesExist = [
       firstNameValue,
       lastNameValue,
-      patronymicValue,
+      middleNameValue,
     ].every((value) => value?.length)
 
     const isFormValid = isAllValuesExist && areAllValuesValid
@@ -117,6 +117,7 @@ export const FirstStage = memo(
           onBlur={onBlurFirstNameHandler}
           error={firstNameError}
           margin="0 0 1rem 0"
+          cypressName="firstName"
         />
 
         <CustomInput
@@ -127,22 +128,25 @@ export const FirstStage = memo(
           onChange={onChangeLastNameHandler}
           onBlur={onBlurSecondNameHandler}
           margin="0 0 1rem 0"
+          cypressName="lastName"
         />
 
         <CustomInput
           label="Отчество"
-          name="patronymic"
-          value={patronymicValue}
-          error={patronymicError}
-          onChange={onChangePatronymicHandler}
-          onBlur={onBlurPatronymicHandler}
+          name="middleName"
+          value={middleNameValue}
+          error={middleNameError}
+          onChange={onChangeMiddleNameHandler}
+          onBlur={onBlurMiddleNameHandler}
+          cypressName="middleName"
         />
 
         <P
           color={PRIMARY_COLOR}
           onClick={onRouteToSignup}
           cursor="pointer"
-          margin="0.5rem auto 0 0"
+          margin="0.5rem auto 0 0.75rem"
+          data-cy="toSignupRoute"
         >
           {linkNavigateText}
         </P>
@@ -154,6 +158,7 @@ export const FirstStage = memo(
           padding="0.5rem"
           disabled={!isFormValid}
           onClick={onSubmitHandler}
+          data-cy="nextStageButton"
         >
           {submitButtonText}
         </Button>

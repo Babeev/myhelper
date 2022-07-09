@@ -9,6 +9,12 @@ export const FlexContainer = styled.div<{
   isWrap?: boolean
   width?: string
   height?: string
+  backgroundColor?: string
+  color?: string
+  border?: string
+  borderRadius?: string
+  overflow?: string
+  hoverOpacity?: number
 }>`
   position: ${({ position }) => position || 'static'};
   display: flex;
@@ -19,4 +25,15 @@ export const FlexContainer = styled.div<{
   flex-wrap: ${({ isWrap }) => (isWrap ? 'wrap' : 'no-wrap')};
   width: ${({ width }) => width || 'auto'};
   height: ${({ height }) => height || 'auto'};
+  box-sizing: border-box;
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || 'transparent'};
+  color: ${({ color }) => color || '#000'};
+  border: ${({ border }) => border || 'none'};
+  border-radius: ${({ borderRadius }) => borderRadius || 0};
+  overflow: ${({ overflow }) => overflow || 'visible'};
+
+  &:hover {
+    opacity: ${({ hoverOpacity }) => hoverOpacity || 1};
+  }
 `

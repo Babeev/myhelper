@@ -10,6 +10,8 @@ const Img = styled.img`
   margin: auto;
   width: 2rem;
   cursor: pointer;
+  filter: invert(26%) sepia(92%) saturate(3911%) hue-rotate(214deg)
+    brightness(104%) contrast(98%);
 
   &:hover {
     opacity: 0.7;

@@ -10,6 +10,7 @@ interface CustomInputProps {
   margin?: string
   width?: string
   height?: string
+  cypressName?: string
   onChange?: (value: string) => void
   onFocus?: (event: FocusEvent<HTMLInputElement>) => void
   onBlur?: (value: string) => void
@@ -37,7 +38,7 @@ const InputLabel = styled.label<{
   top: 25%;
   left: ${({ paddingLeft }) => paddingLeft || '0.85rem'};
   transition: all 0.2s ease;
-  z-index: 0;
+  z-index: 1;
 
   white-space: nowrap;
   overflow: hidden;
@@ -54,6 +55,7 @@ const InputLabel = styled.label<{
       z-index: 1;
       background: white;
       padding: 0 8px;
+      border-radius: 30px;
     `}
 `
 
@@ -66,7 +68,7 @@ const Input = styled.input<{
 }>`
   border: 2px solid ${({ error }) => (error ? DANGER_COLOR : GRAY_COLOR)};
   border-radius: 0.45rem;
-  background-color: transparent;
+  background-color: #fff;
   outline: none;
   padding-top: ${({ paddingTop }) => (paddingTop ? paddingTop : '0.75rem')};
   padding-right: ${({ paddingRight }) =>
@@ -87,6 +89,7 @@ export const CustomInput = ({
   margin,
   width,
   height,
+  cypressName,
   onChange,
   onFocus,
   onBlur,
@@ -128,6 +131,7 @@ export const CustomInput = ({
         onChange={onChangeHandler}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
+        data-cy={cypressName}
       />
     </InputContainer>
   )

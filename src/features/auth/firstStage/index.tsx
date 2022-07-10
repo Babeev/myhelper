@@ -1,17 +1,13 @@
-import { useState, useCallback, memo } from 'react'
+import { useCallback, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PRIMARY_COLOR, GRAY_COLOR, BACKGROUND_COLOR } from 'common/constants'
+import { PRIMARY_COLOR, GRAY_COLOR } from 'common/constants'
 import { CustomForm } from 'common/customForm'
-import { CustomInput } from 'common/customInput'
 import { Button } from 'common/styled/button'
 import { P } from 'common/styled/paragraph'
-import { requiredField } from 'utils/validators'
-import {
-  setFirstName,
-  setLastName,
-  setMiddleName,
-} from 'features/account/accountSlice'
-import { useAppDispatch } from 'app/hooks'
+import { useInputFirstName } from 'common/hooks/useInputFirstName'
+import { useInputLastName } from 'common/hooks/useInputLastName'
+import { useInputMiddleName } from 'common/hooks/useInputMiddleName'
+import { CustomInput } from 'common/customInput'
 
 interface FirstStageProps {
   linkNavigatePath: string
@@ -29,81 +25,68 @@ export const FirstStage = memo(
   }: FirstStageProps) => {
     const navigate = useNavigate()
 
-    const dispatch = useAppDispatch()
-
-    const [firstNameValue, setFirstNameValue] = useState<string | null>(null)
-    const [firstNameError, setFirstNameError] = useState<string | null>(null)
-    const [lastNameValue, setLastNameValue] = useState<string | null>(null)
-    const [lastNameError, setLastNameError] = useState<string | null>(null)
-    const [middleNameValue, setMiddleNameValue] = useState<string | null>(null)
-    const [middleNameError, setMiddleNameError] = useState<string | null>(null)
-
-    const onChangeFirstNameHandler = useCallback((value: string) => {
-      setFirstNameValue(value)
-    }, [])
-
-    const onBlurFirstNameHandler = useCallback(
-      (value: string) => {
-        dispatch(setFirstName(value))
-      },
-      [dispatch]
-    )
-
-    const onChangeLastNameHandler = useCallback((value: string) => {
-      setLastNameValue(value)
-    }, [])
-
-    const onBlurSecondNameHandler = useCallback(
-      (value: string) => {
-        dispatch(setLastName(value))
-      },
-      [dispatch]
-    )
-
-    const onChangeMiddleNameHandler = useCallback((value: string) => {
-      setMiddleNameValue(value)
-    }, [])
-
-    const onBlurMiddleNameHandler = useCallback(
-      (value: string) => {
-        dispatch(setMiddleName(value))
-      },
-      [dispatch]
-    )
+    const {
+      firstNameValue,
+      firstNameError,
+      onChangeFirstNameHandler,
+      onBlurFirstNameHandler,
+      onValidateFirstNameHandler,
+      isFirstNameValueExist,
+      isFirstNameErrorExist,
+    } = useInputFirstName()
+    const {
+      lastNameValue,
+      lastNameError,
+      onChangeLastNameHandler,
+      onBlurSecondNameHandler,
+      onValidateSecondNameHandler,
+      isLastNameValueExist,
+      isLastNameErrorExist,
+    } = useInputLastName()
+    const {
+      middleNameValue,
+      middleNameError,
+      onChangeMiddleNameHandler,
+      onBlurMiddleNameHandler,
+      onValidateMiddleNameHandler,
+      isMiddleNameValueExist,
+      isMiddleNameErrorExist,
+    } = useInputMiddleName()
 
     const onRouteToSignup = () => {
       navigate(linkNavigatePath)
     }
 
-    const validate = (inputName: string, inputValue: string) => {
-      if (inputName === 'firstName') {
-        const error = requiredField(inputValue)
-
-        setFirstNameError(error || '')
-      }
-      if (inputName === 'lastName') {
-        const error = requiredField(inputValue)
-
-        setLastNameError(error || '')
-      }
-      if (inputName === 'middleName') {
-        const error = requiredField(inputValue)
-
-        setMiddleNameError(error || '')
-      }
-    }
+    const validate = useCallback(
+      (inputName: string, inputValue: string) => {
+        if (inputName === 'firstName') {
+          onValidateFirstNameHandler(inputValue)
+        }
+        if (inputName === 'lastName') {
+          onValidateSecondNameHandler(inputValue)
+        }
+        if (inputName === 'middleName') {
+          onValidateMiddleNameHandler(inputValue)
+        }
+      },
+      [
+        onValidateFirstNameHandler,
+        onValidateSecondNameHandler,
+        onValidateMiddleNameHandler,
+      ]
+    )
 
     const areAllValuesValid = [
-      firstNameError,
-      lastNameError,
-      middleNameError,
+      isFirstNameErrorExist,
+      isLastNameErrorExist,
+      isMiddleNameErrorExist,
     ].every((value) => !value)
 
     const isAllValuesExist = [
-      firstNameValue,
-      lastNameValue,
-      middleNameValue,
-    ].every((value) => value?.length)
+      isFirstNameValueExist,
+      isLastNameValueExist,
+      isMiddleNameValueExist,
+    ].every((value) => value)
 
     const isFormValid = isAllValuesExist && areAllValuesValid
 

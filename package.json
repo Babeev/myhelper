@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "test": "cypress open"
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": [

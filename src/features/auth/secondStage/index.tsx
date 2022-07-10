@@ -1,37 +1,35 @@
 import { PRIMARY_COLOR, GRAY_COLOR } from 'common/constants'
 import { CustomForm } from 'common/customForm'
 import { CustomInput } from 'common/customInput'
+import { useInputNumber } from 'common/hooks/useInputNumber'
 import { Button } from 'common/styled/button'
-import { useState, useCallback } from 'react'
-import { phoneNumber, requiredField } from 'utils/validators'
+import { useCallback } from 'react'
 
 interface SecondStageProps {
   onSubmitHandler: () => void
 }
 
 export const SecondStage = ({ onSubmitHandler }: SecondStageProps) => {
-  const [numberValue, setNumberValue] = useState<string | null>(null)
-  const [numberError, setNumberError] = useState<string | null>(null)
+  const {
+    numberValue,
+    numberError,
+    onChangeNumberHandler,
+    onBlurNumberHandler,
+    onValidateNumberHandler,
+    isNumberValueExist,
+    isNumberErrorExist,
+  } = useInputNumber()
 
-  const areAllValuesValid = [numberError].every((value) => !value)
+  const isFormValid = isNumberValueExist && !isNumberErrorExist
 
-  const isAllValuesExist = [numberValue].every((value) => value?.length)
-
-  const isFormValid = isAllValuesExist && areAllValuesValid
-
-  const onChangeFirstNameHandler = useCallback((value: string) => {
-    setNumberValue(value)
-  }, [])
-
-  const validate = (inputName: string, inputValue: string) => {
-    if (inputName === 'number') {
-      const error = [phoneNumber, requiredField].map((validate) =>
-        validate(inputValue)
-      )
-
-      setNumberError(error?.[0] || '')
-    }
-  }
+  const validate = useCallback(
+    (inputName: string, inputValue: string) => {
+      if (inputName === 'number') {
+        onValidateNumberHandler(inputValue)
+      }
+    },
+    [onValidateNumberHandler]
+  )
 
   return (
     <CustomForm validate={validate} width="100%">
@@ -39,7 +37,8 @@ export const SecondStage = ({ onSubmitHandler }: SecondStageProps) => {
         label="Номер телефона"
         name="number"
         value={numberValue}
-        onChange={onChangeFirstNameHandler}
+        onChange={onChangeNumberHandler}
+        onBlur={onBlurNumberHandler}
         error={numberError}
         margin="0 0 1rem 0"
         cypressName="number"

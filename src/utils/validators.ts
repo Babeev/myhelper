@@ -1,24 +1,24 @@
-export const requiredField = (value: string | number): string | undefined => {
+export const requiredField = (value: string | number): string | null => {
   if (value?.toString().length) {
-    return undefined
+    return null
   }
   return 'Поле, обязательное для заполнения'
 }
 
 export const maxLength =
   (maxLengthValue: number) =>
-  <T>(value: T): string | undefined => {
+  <T>(value: T): string | null => {
     if (value && String(value).length > maxLengthValue) {
       return `Максимум символов - ${maxLengthValue}`
     }
 
-    return undefined
+    return null
   }
 
-export const onlyNumbers = <T>(value: T): string | undefined =>
-  value && isNaN(Number(value)) ? 'Используйте только цифры' : undefined
+export const onlyNumbers = <T>(value: T): string | null =>
+  value && isNaN(Number(value)) ? 'Используйте только цифры' : null
 
-export const phoneNumber = (value: string): string | undefined => {
+export const phoneNumber = (value: string): string | null => {
   if (value) {
     const testBeginning = /^((\+7)|8){1}/gm.test(value)
 
@@ -50,4 +50,6 @@ export const phoneNumber = (value: string): string | undefined => {
       return 'В номере не должно быть больше 11 цифр'
     }
   }
+
+  return null
 }

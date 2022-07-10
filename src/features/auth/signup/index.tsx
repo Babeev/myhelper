@@ -1,5 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { Page } from 'common/page'
 import { FlexContainer } from 'common/styled/flexContainer'
+import { Header } from 'common/styled/header'
 import { setLoggedIn } from 'features/account/accountSlice'
 import { ReturnButton } from 'features/returnButton'
 import { useCallback, useState } from 'react'
@@ -21,7 +23,7 @@ export const Signup = () => {
   const lastName = useAppSelector((state) => state.account.lastName)
   const middleName = useAppSelector((state) => state.account.middleName)
 
-  const [signup, { isLoading }] = useSignupMutation()
+  const [signup] = useSignupMutation()
 
   const onClickReturnHandler = useCallback(() => {
     if (stage === 1) {
@@ -33,9 +35,9 @@ export const Signup = () => {
 
   const onSubmitSignupHandler = useCallback(async () => {
     const promise = signup({
-      firstName,
-      lastName,
-      middleName,
+      firstName: firstName || '',
+      lastName: lastName || '',
+      middleName: middleName || '',
     }).unwrap()
 
     toast.promise(promise, {
@@ -55,23 +57,26 @@ export const Signup = () => {
   }, [signup, firstName, lastName, middleName, dispatch, navigate])
 
   return (
-    <FlexContainer width="100%" height="100%" position="relative">
-      <ReturnButton onClickHandler={onClickReturnHandler} />
+    <Page
+      isReturnPath={true}
+      onReturnHandler={onClickReturnHandler}
+      title="Регистрация"
+      contentWidth="50%"
+    >
+      {stage === 1 ? (
+        <FirstStage
+          linkNavigatePath="/auth/login"
+          linkNavigateText="Уже есть аккаунт?"
+          submitButtonText="Продолжить"
+          onSubmitHandler={() => setStage(2)}
+        />
+      ) : null}
 
-      <FlexContainer margin="auto" width="50%">
-        {stage === 1 && (
-          <FirstStage
-            linkNavigatePath="/auth/login"
-            linkNavigateText="Уже есть аккаунт?"
-            submitButtonText="Продолжить"
-            onSubmitHandler={() => setStage(2)}
-          />
-        )}
+      {stage === 2 ? <SecondStage onSubmitHandler={() => setStage(3)} /> : null}
 
-        {stage === 2 && <SecondStage onSubmitHandler={() => setStage(3)} />}
-
-        {stage === 3 && <ThirdStage onSubmitHandler={onSubmitSignupHandler} />}
-      </FlexContainer>
-    </FlexContainer>
+      {stage === 3 ? (
+        <ThirdStage onSubmitHandler={onSubmitSignupHandler} />
+      ) : null}
+    </Page>
   )
 }

@@ -28,15 +28,15 @@ export const ThirdStage = ({ onSubmitHandler }: ThirdStageProps) => {
     setCodeValue(value)
   }, [])
 
-  const validate = (inputName: string, inputValue: string) => {
+  const validate = useCallback((inputName: string, inputValue: string) => {
     if (inputName === 'code') {
       const error = [requiredField, onlyNumbers, maxLenght4]
         .map((validate) => validate(inputValue))
         .filter((error) => error)
 
-      setCodeError(error?.[0] || '')
+      setCodeError(error?.[0] || null)
     }
-  }
+  }, [])
 
   const onResendHandler = () => {
     setCounter(30)

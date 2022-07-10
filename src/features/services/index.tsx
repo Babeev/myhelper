@@ -1,8 +1,7 @@
-import { FlexContainer } from 'common/styled/flexContainer'
+import { Page } from 'common/page'
 import { ProtectedRoute } from 'features/protectedRoute'
 import { memo, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import styled from 'styled-components'
 import { ServiceRow } from './serviceRow'
 import { useGetServicesQuery } from './servicesEndpoint'
 
@@ -10,13 +9,11 @@ interface ServicesProps {
   isLoggedIn: boolean
 }
 
-const Header = styled.h1`
-  font-size: 2rem;
-  margin: 0 auto 0 0;
-`
-
 export const Services = memo(({ isLoggedIn }: ServicesProps) => {
-  const { data, isError, error } = useGetServicesQuery()
+  const { data, isError, error } = useGetServicesQuery(undefined, {
+    skip: !isLoggedIn,
+    refetchOnMountOrArgChange: true,
+  })
 
   useEffect(() => {
     if (isError) {
@@ -28,17 +25,11 @@ export const Services = memo(({ isLoggedIn }: ServicesProps) => {
 
   return (
     <ProtectedRoute isLoggedIn={isLoggedIn}>
-      <FlexContainer column padding="3rem">
-        <FlexContainer margin="0 0 2rem 0">
-          <Header>Услуги</Header>
-        </FlexContainer>
-
-        <FlexContainer column>
-          {data?.map((service) => (
-            <ServiceRow key={service.id} service={service} />
-          ))}
-        </FlexContainer>
-      </FlexContainer>
+      <Page title="Услуги">
+        {data?.map((service) => (
+          <ServiceRow key={service.id} service={service} />
+        ))}
+      </Page>
     </ProtectedRoute>
   )
 })

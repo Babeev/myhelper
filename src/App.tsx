@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { useAppSelector } from 'app/hooks'
-import { NotFound } from './features/404'
-import { Account } from './features/account'
-import { Login } from './features/auth/login'
-import { Signup } from './features/auth/signup'
-import { Home } from './features/home'
-import { Service } from './features/service'
-import { Services } from './features/services'
+import { useAppSelector } from 'redux/hooks'
+import { NotFound } from './pages/404'
+import { Account } from './pages/account'
+import { Login } from './pages/login'
+import { Signup } from './pages/signup'
+import { MainLayout } from 'common/components/mainLayout'
+import { Service } from './pages/service'
+import { Services } from './pages/services'
 
 export const App = () => {
   const isLoggedIn = useAppSelector((state) => state.account.isLoggedIn)
@@ -14,7 +14,7 @@ export const App = () => {
   return (
     <BrowserRouter basename="myhelper">
       <Routes>
-        <Route path="/" element={<Home />}>
+        <Route path="/" element={<MainLayout />}>
           <Route index element={<Services isLoggedIn={false} />} />
 
           <Route path="auth">

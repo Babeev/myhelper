@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const FlexContainer = styled.div<{
   position?: string
+  top?: string
+  right?: string
   column?: boolean
   margin?: string
   padding?: string
@@ -17,6 +19,8 @@ export const FlexContainer = styled.div<{
   hoverOpacity?: number
 }>`
   position: ${({ position }) => position || 'static'};
+  top: ${({ top }) => top || 'auto'};
+  right: ${({ right }) => right || 'auto'};
   display: flex;
   flex-direction: ${({ column }) => (column ? 'column' : 'row')};
   margin: ${({ margin }) => margin || '0'};

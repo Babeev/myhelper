@@ -28,9 +28,9 @@ export const App = () => {
           </Route>
 
           <Route path="account" element={<Account isLoggedIn={isLoggedIn} />} />
-        </Route>
 
-        <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

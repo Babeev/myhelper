@@ -1,4 +1,4 @@
-import { AddDealRequest, Deal, GetServicesResponse } from 'common/types'
+import { AddDealRequest, Deal, GetServicesResponse } from 'types'
 import { api } from 'redux/api'
 
 const dealsEndpoint = api.injectEndpoints({

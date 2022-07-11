@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const P = styled.p<{
+export const StyledP = styled.p<{
   padding?: string
   fontSize?: string
   fontWeight?: number

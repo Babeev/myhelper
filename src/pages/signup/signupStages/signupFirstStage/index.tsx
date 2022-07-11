@@ -1,13 +1,12 @@
-import { useCallback, memo } from 'react'
+import { useCallback, memo, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PRIMARY_COLOR, GRAY_COLOR } from 'common/constants'
 import { Form } from 'common/components/form'
-import { Button } from 'common/styled/button'
-import { P } from 'common/styled/paragraph'
+import { StyledButton } from 'common/styled/styledButton'
+import { StyledP } from 'common/styled/styledP'
 import { Input } from 'common/components/input'
-import { useMemo } from 'react'
-import { requiredField } from 'common/utils/validators'
-import { FlexContainer } from 'common/styled/flexContainer'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { PRIMARY_COLOR, GRAY_COLOR } from 'utils/constants'
+import { requiredField } from 'utils/validators'
 
 interface SignupFirstStageProps {
   linkNavigatePath: string
@@ -61,7 +60,7 @@ export const SignupFirstStage = memo(
     return (
       <Form initialValues={initialValues} validate={validate}>
         {({ values, errors, isFormValid }) => (
-          <FlexContainer column gap="1rem">
+          <StyledFlexContainer column gap="1rem">
             <Input
               label="Имя"
               name="firstName"
@@ -86,17 +85,17 @@ export const SignupFirstStage = memo(
               cypressName="middleName"
             />
 
-            <P
+            <StyledP
               color={PRIMARY_COLOR}
               onClick={onRouteToSignup}
               cursor="pointer"
               data-cy="toSignupRoute"
             >
               {linkNavigateText}
-            </P>
+            </StyledP>
 
-            <FlexContainer column alignItems="center">
-              <Button
+            <StyledFlexContainer column alignItems="center">
+              <StyledButton
                 type="button"
                 color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
                 padding="0.5rem 1rem"
@@ -105,9 +104,9 @@ export const SignupFirstStage = memo(
                 data-cy="nextStageButton"
               >
                 {submitButtonText}
-              </Button>
-            </FlexContainer>
-          </FlexContainer>
+              </StyledButton>
+            </StyledFlexContainer>
+          </StyledFlexContainer>
         )}
       </Form>
     )

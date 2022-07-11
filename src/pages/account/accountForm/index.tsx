@@ -2,12 +2,12 @@ import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'redux/hooks'
 import { setAccount } from 'redux/accountSlice'
-import { DANGER_COLOR, GRAY_COLOR, PRIMARY_COLOR } from 'common/constants'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
-import { Button } from 'common/styled/button'
-import { FlexContainer } from 'common/styled/flexContainer'
-import { phoneNumber, requiredField } from 'common/utils/validators'
+import { StyledButton } from 'common/styled/styledButton'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { DANGER_COLOR, GRAY_COLOR, PRIMARY_COLOR } from 'utils/constants'
+import { phoneNumber, requiredField } from 'utils/validators'
 
 export const AccountForm = () => {
   const dispatch = useAppDispatch()
@@ -70,7 +70,7 @@ export const AccountForm = () => {
   return (
     <Form initialValues={initialValues} validate={validate}>
       {({ values, errors, isFormValid }) => (
-        <FlexContainer column gap="1rem">
+        <StyledFlexContainer column gap="1rem">
           <Input
             label="Имя"
             name="firstName"
@@ -111,26 +111,26 @@ export const AccountForm = () => {
             cypressName="number"
           />
 
-          <FlexContainer justifyContent="space-between">
-            <Button
+          <StyledFlexContainer justifyContent="space-between">
+            <StyledButton
               type="button"
               color={DANGER_COLOR}
-              padding="0.5rem"
+              padding="0.5rem 1rem"
               onClick={onExitHandler}
             >
               Выйти
-            </Button>
+            </StyledButton>
 
-            <Button
+            <StyledButton
               type="button"
               color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
-              padding="0.5rem"
+              padding="0.5rem 1rem"
               disabled={!isFormValid}
             >
               Сохранить
-            </Button>
-          </FlexContainer>
-        </FlexContainer>
+            </StyledButton>
+          </StyledFlexContainer>
+        </StyledFlexContainer>
       )}
     </Form>
   )

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const FlexContainer = styled.div<{
+export const StyledFlexContainer = styled.div<{
   position?: string
   top?: string
   right?: string

@@ -1,11 +1,10 @@
-import { PRIMARY_COLOR, GRAY_COLOR } from 'common/constants'
+import { useCallback, useMemo } from 'react'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
-import { Button } from 'common/styled/button'
-import { useCallback } from 'react'
-import { useMemo } from 'react'
-import { phoneNumber, requiredField } from 'common/utils/validators'
-import { FlexContainer } from 'common/styled/flexContainer'
+import { StyledButton } from 'common/styled/styledButton'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { phoneNumber, requiredField } from 'utils/validators'
+import { PRIMARY_COLOR, GRAY_COLOR } from 'utils/constants'
 
 interface SignupSecondStageProps {
   onSubmitHandler: () => void
@@ -33,7 +32,7 @@ export const SignupSecondStage = ({
   return (
     <Form initialValues={initialValues} validate={validate}>
       {({ values, errors, isFormValid }) => (
-        <FlexContainer column gap="1rem">
+        <StyledFlexContainer column gap="1rem">
           <Input
             label="Номер телефона"
             name="number"
@@ -42,8 +41,8 @@ export const SignupSecondStage = ({
             cypressName="number"
           />
 
-          <FlexContainer column alignItems="center">
-            <Button
+          <StyledFlexContainer column alignItems="center">
+            <StyledButton
               type="button"
               color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
               padding="0.5rem 1rem"
@@ -52,9 +51,9 @@ export const SignupSecondStage = ({
               data-cy="nextStageButton"
             >
               Продолжить
-            </Button>
-          </FlexContainer>
-        </FlexContainer>
+            </StyledButton>
+          </StyledFlexContainer>
+        </StyledFlexContainer>
       )}
     </Form>
   )

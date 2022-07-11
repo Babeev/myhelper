@@ -1,7 +1,7 @@
-import { BACKGROUND_COLOR } from 'common/constants'
-import { FlexContainer } from 'common/styled/flexContainer'
-import { Header } from 'common/styled/header'
 import { memo, ReactElement } from 'react'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { StyledHeader } from 'common/styled/styledHeader'
+import { BACKGROUND_COLOR } from 'utils/constants'
 import { Overlay } from './styled'
 
 interface ModalProps {
@@ -20,7 +20,7 @@ export const Modal = memo(({ isShow, onHide, title, children }: ModalProps) => {
     <>
       <Overlay onClick={onHideHandler} />
 
-      <FlexContainer
+      <StyledFlexContainer
         column
         position="fixed"
         top="25%"
@@ -35,12 +35,12 @@ export const Modal = memo(({ isShow, onHide, title, children }: ModalProps) => {
           e.stopPropagation()
         }}
       >
-        <Header fontSize="1.5rem" margin="0 auto 1rem 0">
+        <StyledHeader fontSize="1.5rem" margin="0 auto 1rem 0">
           {title}
-        </Header>
+        </StyledHeader>
 
-        <FlexContainer>{children}</FlexContainer>
-      </FlexContainer>
+        <StyledFlexContainer>{children}</StyledFlexContainer>
+      </StyledFlexContainer>
     </>
   ) : null
 })

@@ -1,6 +1,6 @@
-import { FlexContainer } from 'common/styled/flexContainer'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import styled from 'styled-components'
-import arrow from 'common/assets/icons/arrow-left.svg'
+import arrow from 'assets/icons/arrow-left.svg'
 
 interface ReturnButtonProps {
   onClickHandler: () => void
@@ -20,8 +20,13 @@ const Img = styled.img`
 
 export const ReturnButton = ({ onClickHandler }: ReturnButtonProps) => {
   return (
-    <FlexContainer position="absolute" column height="100%" padding="0 1rem">
+    <StyledFlexContainer
+      position="absolute"
+      column
+      height="100%"
+      padding="0 1rem"
+    >
       <Img src={arrow} onClick={onClickHandler} />
-    </FlexContainer>
+    </StyledFlexContainer>
   )
 }

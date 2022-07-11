@@ -1,7 +1,7 @@
-import { FlexContainer } from 'common/styled/flexContainer'
-import { Header } from 'common/styled/header'
-import { ReturnButton } from 'common/components/returnButton'
 import { ReactElement } from 'react'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { StyledHeader } from 'common/styled/styledHeader'
+import { ReturnButton } from 'common/components/returnButton'
 
 interface PageProps {
   isReturnPath?: boolean
@@ -19,22 +19,22 @@ export const Layout = ({
   children,
 }: PageProps) => {
   return (
-    <FlexContainer height="100%" position="relative">
+    <StyledFlexContainer height="100%" position="relative">
       {isReturnPath && onReturnHandler && (
         <ReturnButton onClickHandler={onReturnHandler} />
       )}
 
-      <FlexContainer column padding="3rem" width="100%">
-        <FlexContainer padding="0 0 2rem 0">
-          <Header margin="0 auto 0 0">{title}</Header>
+      <StyledFlexContainer column padding="3rem" width="100%">
+        <StyledFlexContainer padding="0 0 2rem 0">
+          <StyledHeader margin="0 auto 0 0">{title}</StyledHeader>
 
           {options}
-        </FlexContainer>
+        </StyledFlexContainer>
 
-        <FlexContainer column alignItems="center">
+        <StyledFlexContainer column alignItems="center">
           {children}
-        </FlexContainer>
-      </FlexContainer>
-    </FlexContainer>
+        </StyledFlexContainer>
+      </StyledFlexContainer>
+    </StyledFlexContainer>
   )
 }

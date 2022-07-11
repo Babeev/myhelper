@@ -1,5 +1,5 @@
-import { BACKGROUND_COLOR, DANGER_COLOR, GRAY_COLOR } from 'common/constants'
 import styled from 'styled-components'
+import { BACKGROUND_COLOR, DANGER_COLOR, GRAY_COLOR } from 'utils/constants'
 
 export const InputContainer = styled.div`
   display: flex;

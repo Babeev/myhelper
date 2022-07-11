@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Header = styled.h1<{
+export const StyledHeader = styled.h1<{
   fontSize?: string
   margin?: string
   opacity?: string

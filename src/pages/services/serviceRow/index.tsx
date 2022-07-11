@@ -1,6 +1,6 @@
-import { FlexContainer } from 'common/styled/flexContainer'
-import { P } from 'common/styled/paragraph'
-import { Deal } from 'common/types'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { StyledP } from 'common/styled/styledP'
+import { Deal } from 'types'
 
 interface ServiceRowProps {
   service: Deal
@@ -8,7 +8,7 @@ interface ServiceRowProps {
 
 export const ServiceRow = ({ service }: ServiceRowProps) => {
   return (
-    <FlexContainer
+    <StyledFlexContainer
       padding="1rem 1rem 1.5rem 2rem"
       borderRadius="30px"
       hoverOpacity={0.7}
@@ -16,21 +16,21 @@ export const ServiceRow = ({ service }: ServiceRowProps) => {
       backgroundColor="#fff"
       gap="2rem"
     >
-      <FlexContainer column cursor="pointer" gap="2rem">
-        <P fontSize="1.5rem" fontWeight={500} cursor="pointer">
+      <StyledFlexContainer column cursor="pointer" gap="2rem">
+        <StyledP fontSize="1.5rem" fontWeight={500} cursor="pointer">
           {service.name}
-        </P>
+        </StyledP>
 
-        <P fontSize="1" cursor="pointer">
+        <StyledP fontSize="1" cursor="pointer">
           {service.description}
-        </P>
-      </FlexContainer>
+        </StyledP>
+      </StyledFlexContainer>
 
-      <FlexContainer alignItems="center">
-        <P cursor="pointer" fontWeight={500}>
+      <StyledFlexContainer alignItems="center">
+        <StyledP cursor="pointer" fontWeight={500}>
           {service.price} &#x20bd;
-        </P>
-      </FlexContainer>
-    </FlexContainer>
+        </StyledP>
+      </StyledFlexContainer>
+    </StyledFlexContainer>
   )
 }

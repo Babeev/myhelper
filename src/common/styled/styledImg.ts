@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Img = styled.img<{
+export const StyledImg = styled.img<{
   margin?: string
   padding?: string
   width?: string

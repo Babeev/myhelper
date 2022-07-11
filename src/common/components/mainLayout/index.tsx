@@ -1,11 +1,11 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { FlexContainer } from 'common/styled/flexContainer'
 import { useAppSelector } from 'redux/hooks'
-import { BACKGROUND_COLOR } from 'common/constants'
-import { Header } from 'common/styled/header'
-import { Img } from 'common/styled/img'
-import person from 'common/assets/icons/person-circle.svg'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { StyledHeader } from 'common/styled/styledHeader'
+import { StyledImg } from 'common/styled/styledImg'
+import { BACKGROUND_COLOR } from 'utils/constants'
+import person from 'assets/icons/person-circle.svg'
 import 'react-toastify/dist/ReactToastify.css'
 
 export const MainLayout = () => {
@@ -22,14 +22,14 @@ export const MainLayout = () => {
   }
 
   return (
-    <FlexContainer
+    <StyledFlexContainer
       column
       height="100%"
       backgroundColor={BACKGROUND_COLOR}
       overflow="auto"
     >
-      <FlexContainer backgroundColor="#fff">
-        <Header
+      <StyledFlexContainer backgroundColor="#fff">
+        <StyledHeader
           fontSize="3rem"
           margin="1rem auto 1.5rem 2rem"
           opacity="0.7"
@@ -37,10 +37,10 @@ export const MainLayout = () => {
           onClick={onClickHeaderHandler}
         >
           MyHelper
-        </Header>
+        </StyledHeader>
 
         {isLoggedIn && (
-          <Img
+          <StyledImg
             margin="auto 2rem auto auto"
             width="40px"
             height="40px"
@@ -50,7 +50,7 @@ export const MainLayout = () => {
             onClick={onClickAccountHandler}
           />
         )}
-      </FlexContainer>
+      </StyledFlexContainer>
 
       <Outlet />
 
@@ -65,6 +65,6 @@ export const MainLayout = () => {
         draggable
         pauseOnHover
       />
-    </FlexContainer>
+    </StyledFlexContainer>
   )
 }

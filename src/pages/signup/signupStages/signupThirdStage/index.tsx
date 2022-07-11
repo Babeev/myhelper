@@ -1,13 +1,12 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useMemo } from 'react'
 import { toast } from 'react-toastify'
-import { PRIMARY_COLOR, GRAY_COLOR } from 'common/constants'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
-import { Button } from 'common/styled/button'
-import { P } from 'common/styled/paragraph'
-import { maxLength, onlyNumbers, requiredField } from 'common/utils/validators'
-import { useMemo } from 'react'
-import { FlexContainer } from 'common/styled/flexContainer'
+import { StyledButton } from 'common/styled/styledButton'
+import { StyledP } from 'common/styled/styledP'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { maxLength, onlyNumbers, requiredField } from 'utils/validators'
+import { PRIMARY_COLOR, GRAY_COLOR } from 'utils/constants'
 
 interface SignupThirdStageProps {
   onSubmitHandler: () => void
@@ -57,7 +56,7 @@ export const SignupThirdStage = ({
   return (
     <Form initialValues={initialValues} validate={validate}>
       {({ values, errors, isFormValid }) => (
-        <FlexContainer column gap="0.5rem">
+        <StyledFlexContainer column gap="0.5rem">
           <Input
             label="Код из СМС"
             name="code"
@@ -67,17 +66,25 @@ export const SignupThirdStage = ({
           />
 
           {counter ? (
-            <P color={GRAY_COLOR}>
+            <StyledP color={GRAY_COLOR}>
               Отправить код повторно можно через {counter} секунд
-            </P>
+            </StyledP>
           ) : (
-            <P color={PRIMARY_COLOR} cursor="pointer" onClick={onResendHandler}>
+            <StyledP
+              color={PRIMARY_COLOR}
+              cursor="pointer"
+              onClick={onResendHandler}
+            >
               Отправить код повторно
-            </P>
+            </StyledP>
           )}
 
-          <FlexContainer column alignItems="center" padding="0.5rem 0 0 0">
-            <Button
+          <StyledFlexContainer
+            column
+            alignItems="center"
+            padding="0.5rem 0 0 0"
+          >
+            <StyledButton
               type="button"
               color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
               padding="0.5rem 1rem"
@@ -86,9 +93,9 @@ export const SignupThirdStage = ({
               data-cy="submitSignup"
             >
               Зарегистрироваться
-            </Button>
-          </FlexContainer>
-        </FlexContainer>
+            </StyledButton>
+          </StyledFlexContainer>
+        </StyledFlexContainer>
       )}
     </Form>
   )

@@ -8,7 +8,7 @@ import { useSignupMutation } from 'redux/api/auth'
 import { SignupFirstStage } from './signupStages/signupFirstStage'
 import { SignupSecondStage } from './signupStages/signupSecondStage'
 import { SignupThirdStage } from './signupStages/signupThirdStage'
-import { FlexContainer } from 'common/styled/flexContainer'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 
 export const Signup = () => {
   const navigate = useNavigate()
@@ -60,7 +60,7 @@ export const Signup = () => {
       onReturnHandler={onClickReturnHandler}
       title="Регистрация"
     >
-      <FlexContainer column width="50%" padding="3rem 0 0 0">
+      <StyledFlexContainer column width="50%" padding="3rem 0 0 0">
         {stage === 1 ? (
           <SignupFirstStage
             linkNavigatePath="/auth/login"
@@ -77,7 +77,7 @@ export const Signup = () => {
         {stage === 3 ? (
           <SignupThirdStage onSubmitHandler={onSubmitSignupHandler} />
         ) : null}
-      </FlexContainer>
+      </StyledFlexContainer>
     </Layout>
   )
 }

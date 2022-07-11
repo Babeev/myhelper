@@ -1,15 +1,15 @@
-import { GRAY_COLOR, PRIMARY_COLOR } from 'common/constants'
+import { useCallback, useMemo } from 'react'
+import { toast } from 'react-toastify'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
 import { Modal } from 'common/components/modal'
-import { Button } from 'common/styled/button'
-import { FlexContainer } from 'common/styled/flexContainer'
-import { useCallback, useMemo } from 'react'
-import { requiredField } from 'common/utils/validators'
-import { useAddDealMutation } from 'redux/api/deals'
-import { AddDealRequest } from 'common/types'
-import { toast } from 'react-toastify'
+import { StyledButton } from 'common/styled/styledButton'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { AddDealRequest } from 'types'
 import { useAppSelector } from 'redux/hooks'
+import { requiredField } from 'utils/validators'
+import { useAddDealMutation } from 'redux/api/deals'
+import { GRAY_COLOR, PRIMARY_COLOR } from 'utils/constants'
 
 interface ModalAddNewServiceProps {
   isShow: boolean
@@ -62,10 +62,10 @@ export const ModalAddNewService = ({
 
   return (
     <Modal isShow={isShow} onHide={onHide} title="Новая услуга">
-      <FlexContainer column>
+      <StyledFlexContainer column>
         <Form initialValues={initialValues} validate={validate}>
           {({ values, errors, isFormValid }) => (
-            <FlexContainer column gap="0.5rem" padding="0 3rem">
+            <StyledFlexContainer column gap="0.5rem" padding="0 3rem">
               <Input
                 name="name"
                 label="Название"
@@ -98,20 +98,24 @@ export const ModalAddNewService = ({
                 cypressName="price"
               />
 
-              <FlexContainer column alignItems="center" padding="0.5rem 0 0 0">
-                <Button
+              <StyledFlexContainer
+                column
+                alignItems="center"
+                padding="0.5rem 0 0 0"
+              >
+                <StyledButton
                   color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
                   disabled={!isFormValid}
                   padding="0.5rem 1rem"
                   onClick={() => onAddDealHandler(values as initialValues)}
                 >
                   Создать услугу
-                </Button>
-              </FlexContainer>
-            </FlexContainer>
+                </StyledButton>
+              </StyledFlexContainer>
+            </StyledFlexContainer>
           )}
         </Form>
-      </FlexContainer>
+      </StyledFlexContainer>
     </Modal>
   )
 }

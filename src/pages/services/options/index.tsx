@@ -1,6 +1,6 @@
-import { FlexContainer } from 'common/styled/flexContainer'
-import { Img } from 'common/styled/img'
-import plus from 'common/assets/icons/plus-circle.svg'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { StyledImg } from 'common/styled/styledImg'
+import plus from 'assets/icons/plus-circle.svg'
 
 interface OptionsProps {
   onOpenHandler: () => void
@@ -8,8 +8,8 @@ interface OptionsProps {
 
 export const Options = ({ onOpenHandler }: OptionsProps) => {
   return (
-    <FlexContainer padding="1rem">
-      <Img
+    <StyledFlexContainer padding="1rem">
+      <StyledImg
         src={plus}
         cursor="pointer"
         hoverOpacity="0.7"
@@ -17,6 +17,6 @@ export const Options = ({ onOpenHandler }: OptionsProps) => {
         height="25px"
         onClick={onOpenHandler}
       />
-    </FlexContainer>
+    </StyledFlexContainer>
   )
 }

@@ -6,7 +6,7 @@ import { ModalAddNewService } from './modalAddNewService'
 import { Options } from './options'
 import { ServiceRow } from './serviceRow'
 import { useGetDealsQuery } from 'redux/api/deals'
-import { FlexContainer } from 'common/styled/flexContainer'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 
 interface ServicesProps {
   isLoggedIn: boolean
@@ -42,13 +42,13 @@ export const Services = memo(({ isLoggedIn }: ServicesProps) => {
         title="Услуги"
         options={<Options onOpenHandler={onOpenModalHandler} />}
       >
-        <FlexContainer column gap="1rem" padding="0 0 3rem 0">
+        <StyledFlexContainer column gap="1rem" padding="0 0 3rem 0">
           {data?.map((service) => (
             <ServiceRow key={service.id} service={service} />
           ))}
 
           <ModalAddNewService isShow={isShow} onHide={onCloseModalHandler} />
-        </FlexContainer>
+        </StyledFlexContainer>
       </Layout>
     </ProtectedRoute>
   )

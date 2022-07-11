@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 import { Layout } from 'common/components/layout'
 import { ProtectedRoute } from 'common/components/protectedRoute'
@@ -9,7 +9,7 @@ import { ModalAddNewService } from './modalAddNewService'
 import { Options } from './options'
 import { ServiceRow } from './serviceRow'
 
-export const Services = memo(() => {
+export const Services = () => {
   const [isShowAddNewServiceModal, setShowAddNewServiceModal] = useState(false)
   const [dealsPart, setDealsPart] = useState<'all' | 'my'>('all')
 
@@ -72,4 +72,4 @@ export const Services = memo(() => {
       </Layout>
     </ProtectedRoute>
   )
-})
+}

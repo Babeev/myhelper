@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import styled from 'styled-components'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import arrow from 'assets/icons/arrow-left.svg'
@@ -18,7 +19,7 @@ const Img = styled.img`
   }
 `
 
-export const ReturnButton = ({ onClickHandler }: ReturnButtonProps) => {
+export const ReturnButton = memo(({ onClickHandler }: ReturnButtonProps) => {
   return (
     <StyledFlexContainer
       position="absolute"
@@ -29,4 +30,4 @@ export const ReturnButton = ({ onClickHandler }: ReturnButtonProps) => {
       <Img src={arrow} onClick={onClickHandler} />
     </StyledFlexContainer>
   )
-}
+})

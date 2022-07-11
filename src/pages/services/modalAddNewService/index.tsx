@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import { toast } from 'react-toastify'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
@@ -21,99 +21,98 @@ type initialValues = Pick<
   'name' | 'description' | 'city' | 'price'
 >
 
-export const ModalAddNewService = ({
-  isShow,
-  onHide,
-}: ModalAddNewServiceProps) => {
-  const [addDeal] = useAddDealMutation()
+export const ModalAddNewService = memo(
+  ({ isShow, onHide }: ModalAddNewServiceProps) => {
+    const [addDeal] = useAddDealMutation()
 
-  const userId = useAppSelector((state) => state.account.userId)
+    const userId = useAppSelector((state) => state.account.userId)
 
-  const onAddDealHandler = async (values: initialValues) => {
-    const promise = addDeal({
-      ...values,
-      ownerId: userId,
-      date: '',
-    }).unwrap()
+    const onAddDealHandler = async (values: initialValues) => {
+      const promise = addDeal({
+        ...values,
+        ownerId: userId,
+        date: '',
+      }).unwrap()
 
-    toast.promise(promise, {
-      pending: 'Загрузка...',
-      success: 'Услуга добавлена',
-      error: 'Не удалось добавить услугу',
-    })
+      toast.promise(promise, {
+        pending: 'Загрузка...',
+        success: 'Услуга добавлена',
+        error: 'Не удалось добавить услугу',
+      })
 
-    promise.catch((e) => console.log(e))
-  }
-
-  const validate = useCallback((inputName: string, inputValue: string) => {
-    const errors: Record<string, string | null> = {}
-
-    if (inputName === 'name') {
-      const error = requiredField(inputValue)
-      errors.name = error
+      promise.catch((e) => console.log(e))
     }
-    return errors
-  }, [])
 
-  const initialValues: initialValues = useMemo(
-    () => ({ name: null, description: null, city: null, price: null }),
-    []
-  )
+    const validate = useCallback((inputName: string, inputValue: string) => {
+      const errors: Record<string, string | null> = {}
 
-  return (
-    <Modal isShow={isShow} onHide={onHide} title="Новая услуга">
-      <Form initialValues={initialValues} validate={validate}>
-        {({ values, errors, isFormValid }) => (
-          <StyledFlexContainer column gap="0.5rem" padding="0 3rem">
-            <Input
-              name="name"
-              label="Название"
-              value={values.name}
-              error={errors.name}
-              cypressName="name"
-            />
+      if (inputName === 'name') {
+        const error = requiredField(inputValue)
+        errors.name = error
+      }
+      return errors
+    }, [])
 
-            <Input
-              name="description"
-              label="Описание"
-              value={values.description}
-              error={errors.description}
-              cypressName="description"
-            />
+    const initialValues: initialValues = useMemo(
+      () => ({ name: null, description: null, city: null, price: null }),
+      []
+    )
 
-            <Input
-              name="city"
-              label="Город"
-              value={values.city}
-              error={errors.city}
-              cypressName="city"
-            />
+    return (
+      <Modal isShow={isShow} onHide={onHide} title="Новая услуга">
+        <Form initialValues={initialValues} validate={validate}>
+          {({ values, errors, isFormValid }) => (
+            <StyledFlexContainer column gap="0.5rem" padding="0 3rem">
+              <Input
+                name="name"
+                label="Название"
+                value={values.name}
+                error={errors.name}
+                cypressName="name"
+              />
 
-            <Input
-              name="price"
-              label="Цена"
-              value={values.price}
-              error={errors.price}
-              cypressName="price"
-            />
+              <Input
+                name="description"
+                label="Описание"
+                value={values.description}
+                error={errors.description}
+                cypressName="description"
+              />
 
-            <StyledFlexContainer
-              column
-              alignItems="center"
-              padding="0.5rem 0 0 0"
-            >
-              <StyledButton
-                color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
-                disabled={!isFormValid}
-                padding="0.5rem 1rem"
-                onClick={() => onAddDealHandler(values as initialValues)}
+              <Input
+                name="city"
+                label="Город"
+                value={values.city}
+                error={errors.city}
+                cypressName="city"
+              />
+
+              <Input
+                name="price"
+                label="Цена"
+                value={values.price}
+                error={errors.price}
+                cypressName="price"
+              />
+
+              <StyledFlexContainer
+                column
+                alignItems="center"
+                padding="0.5rem 0 0 0"
               >
-                Создать услугу
-              </StyledButton>
+                <StyledButton
+                  color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                  disabled={!isFormValid}
+                  padding="0.5rem 1rem"
+                  onClick={() => onAddDealHandler(values as initialValues)}
+                >
+                  Создать услугу
+                </StyledButton>
+              </StyledFlexContainer>
             </StyledFlexContainer>
-          </StyledFlexContainer>
-        )}
-      </Form>
-    </Modal>
-  )
-}
+          )}
+        </Form>
+      </Modal>
+    )
+  }
+)

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { StyledP } from 'common/styled/styledP'
 import { Deal } from 'types'
@@ -6,7 +7,7 @@ interface ServiceRowProps {
   service: Deal
 }
 
-export const ServiceRow = ({ service }: ServiceRowProps) => {
+export const ServiceRow = memo(({ service }: ServiceRowProps) => {
   return (
     <StyledFlexContainer
       padding="1rem 1rem 1.5rem 2rem"
@@ -33,4 +34,4 @@ export const ServiceRow = ({ service }: ServiceRowProps) => {
       </StyledFlexContainer>
     </StyledFlexContainer>
   )
-}
+})

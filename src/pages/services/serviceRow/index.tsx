@@ -11,18 +11,13 @@ export const ServiceRow = ({ service }: ServiceRowProps) => {
     <FlexContainer
       padding="1rem 1rem 1.5rem 2rem"
       borderRadius="30px"
-      margin="0 0 0.5rem 0"
       hoverOpacity={0.7}
       cursor="pointer"
       backgroundColor="#fff"
+      gap="2rem"
     >
-      <FlexContainer column margin="0 auto 0 0" cursor="pointer">
-        <P
-          fontSize="1.5rem"
-          fontWeight={500}
-          margin="0 auto 1rem 0"
-          cursor="pointer"
-        >
+      <FlexContainer column cursor="pointer" gap="2rem">
+        <P fontSize="1.5rem" fontWeight={500} cursor="pointer">
           {service.name}
         </P>
 
@@ -31,9 +26,11 @@ export const ServiceRow = ({ service }: ServiceRowProps) => {
         </P>
       </FlexContainer>
 
-      <P margin="auto 0" cursor="pointer" fontWeight={500}>
-        {service.price} &#x20bd;
-      </P>
+      <FlexContainer alignItems="center">
+        <P cursor="pointer" fontWeight={500}>
+          {service.price} &#x20bd;
+        </P>
+      </FlexContainer>
     </FlexContainer>
   )
 }

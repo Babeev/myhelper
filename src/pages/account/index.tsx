@@ -1,5 +1,6 @@
 import { Layout } from 'common/components/layout'
 import { ProtectedRoute } from 'common/components/protectedRoute'
+import { FlexContainer } from 'common/styled/flexContainer'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AccountForm } from './accountForm'
@@ -21,9 +22,10 @@ export const Account = ({ isLoggedIn }: AccountProps) => {
         isReturnPath={true}
         onReturnHandler={onClickReturnHandler}
         title="Профиль"
-        contentWidth="50%"
       >
-        <AccountForm />
+        <FlexContainer column width="50%" padding="2rem 0 0 0">
+          <AccountForm />
+        </FlexContainer>
       </Layout>
     </ProtectedRoute>
   )

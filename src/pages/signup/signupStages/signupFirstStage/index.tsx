@@ -7,6 +7,7 @@ import { P } from 'common/styled/paragraph'
 import { Input } from 'common/components/input'
 import { useMemo } from 'react'
 import { requiredField } from 'common/utils/validators'
+import { FlexContainer } from 'common/styled/flexContainer'
 
 interface SignupFirstStageProps {
   linkNavigatePath: string
@@ -60,13 +61,12 @@ export const SignupFirstStage = memo(
     return (
       <Form initialValues={initialValues} validate={validate}>
         {({ values, errors, isFormValid }) => (
-          <>
+          <FlexContainer column gap="1rem">
             <Input
               label="Имя"
               name="firstName"
               value={values.firstName}
               error={errors.firstName}
-              margin="0 0 1rem 0"
               cypressName="firstName"
             />
 
@@ -75,7 +75,6 @@ export const SignupFirstStage = memo(
               name="lastName"
               value={values.lastName}
               error={errors.lastName}
-              margin="0 0 1rem 0"
               cypressName="lastName"
             />
 
@@ -91,24 +90,24 @@ export const SignupFirstStage = memo(
               color={PRIMARY_COLOR}
               onClick={onRouteToSignup}
               cursor="pointer"
-              margin="0.5rem auto 0 0.75rem"
               data-cy="toSignupRoute"
             >
               {linkNavigateText}
             </P>
 
-            <Button
-              type="button"
-              color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
-              margin="1rem auto"
-              padding="0.5rem"
-              disabled={!isFormValid}
-              onClick={onSubmitHandler}
-              data-cy="nextStageButton"
-            >
-              {submitButtonText}
-            </Button>
-          </>
+            <FlexContainer column alignItems="center">
+              <Button
+                type="button"
+                color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                padding="0.5rem 1rem"
+                disabled={!isFormValid}
+                onClick={onSubmitHandler}
+                data-cy="nextStageButton"
+              >
+                {submitButtonText}
+              </Button>
+            </FlexContainer>
+          </FlexContainer>
         )}
       </Form>
     )

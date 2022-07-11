@@ -7,6 +7,7 @@ import { Button } from 'common/styled/button'
 import { P } from 'common/styled/paragraph'
 import { maxLength, onlyNumbers, requiredField } from 'common/utils/validators'
 import { useMemo } from 'react'
+import { FlexContainer } from 'common/styled/flexContainer'
 
 interface SignupThirdStageProps {
   onSubmitHandler: () => void
@@ -56,13 +57,12 @@ export const SignupThirdStage = ({
   return (
     <Form initialValues={initialValues} validate={validate}>
       {({ values, errors, isFormValid }) => (
-        <>
+        <FlexContainer column gap="0.5rem">
           <Input
             label="Код из СМС"
             name="code"
             value={values.code}
             error={errors.code}
-            margin="0 0 1rem 0"
             cypressName="code"
           />
 
@@ -76,19 +76,19 @@ export const SignupThirdStage = ({
             </P>
           )}
 
-          <Button
-            type="button"
-            color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
-            margin="1rem auto"
-            padding="0.5rem"
-            disabled={!isFormValid}
-            onClick={onSubmitHandler}
-            width="auto"
-            data-cy="submitSignup"
-          >
-            Зарегистрироваться
-          </Button>
-        </>
+          <FlexContainer column alignItems="center" padding="0.5rem 0 0 0">
+            <Button
+              type="button"
+              color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+              padding="0.5rem 1rem"
+              disabled={!isFormValid}
+              onClick={onSubmitHandler}
+              data-cy="submitSignup"
+            >
+              Зарегистрироваться
+            </Button>
+          </FlexContainer>
+        </FlexContainer>
       )}
     </Form>
   )

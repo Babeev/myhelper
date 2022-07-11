@@ -20,7 +20,7 @@ const Img = styled.img`
 
 export const ReturnButton = ({ onClickHandler }: ReturnButtonProps) => {
   return (
-    <FlexContainer position="absolute" column width="3rem" height="100%">
+    <FlexContainer position="absolute" column height="100%" padding="0 1rem">
       <Img src={arrow} onClick={onClickHandler} />
     </FlexContainer>
   )

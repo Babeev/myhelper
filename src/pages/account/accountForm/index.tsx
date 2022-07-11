@@ -70,13 +70,12 @@ export const AccountForm = () => {
   return (
     <Form initialValues={initialValues} validate={validate}>
       {({ values, errors, isFormValid }) => (
-        <>
+        <FlexContainer column gap="1rem">
           <Input
             label="Имя"
             name="firstName"
             value={values.firstName}
             error={errors.firstName}
-            margin="0 0 1rem 0"
             cypressName="firstName"
           />
 
@@ -85,7 +84,6 @@ export const AccountForm = () => {
             name="lastName"
             value={values.lastName}
             error={errors.lastName}
-            margin="0 0 1rem 0"
             cypressName="lastName"
           />
 
@@ -94,7 +92,6 @@ export const AccountForm = () => {
             name="middleName"
             value={values.middleName}
             error={errors.middleName}
-            margin="0 0 1rem 0"
             cypressName="middleName"
           />
 
@@ -103,7 +100,6 @@ export const AccountForm = () => {
             name="login"
             value={values.login}
             error={errors.login}
-            margin="0 0 1rem 0"
             cypressName="login"
           />
 
@@ -112,15 +108,13 @@ export const AccountForm = () => {
             name="number"
             value={values.number}
             error={errors.number}
-            margin="0 0 1rem 0"
             cypressName="number"
           />
 
-          <FlexContainer>
+          <FlexContainer justifyContent="space-between">
             <Button
               type="button"
               color={DANGER_COLOR}
-              margin="0 auto 0 0"
               padding="0.5rem"
               onClick={onExitHandler}
             >
@@ -130,14 +124,13 @@ export const AccountForm = () => {
             <Button
               type="button"
               color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
-              margin="0"
               padding="0.5rem"
               disabled={!isFormValid}
             >
               Сохранить
             </Button>
           </FlexContainer>
-        </>
+        </FlexContainer>
       )}
     </Form>
   )

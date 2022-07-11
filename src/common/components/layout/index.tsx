@@ -7,7 +7,6 @@ interface PageProps {
   isReturnPath?: boolean
   onReturnHandler?: () => void
   title?: string
-  contentWidth?: string
   options?: ReactElement
   children?: ReactElement | null | undefined
 }
@@ -16,24 +15,23 @@ export const Layout = ({
   isReturnPath,
   onReturnHandler,
   title,
-  contentWidth,
   options,
   children,
 }: PageProps) => {
   return (
-    <FlexContainer width="100%" height="100%" position="relative">
+    <FlexContainer height="100%" position="relative">
       {isReturnPath && onReturnHandler && (
         <ReturnButton onClickHandler={onReturnHandler} />
       )}
 
-      <FlexContainer width="100%" column margin="0" padding="3rem">
-        <FlexContainer margin="0 0 2rem 0">
+      <FlexContainer column padding="3rem" width="100%">
+        <FlexContainer padding="0 0 2rem 0">
           <Header margin="0 auto 0 0">{title}</Header>
 
           {options}
         </FlexContainer>
 
-        <FlexContainer column margin="auto" width={contentWidth}>
+        <FlexContainer column alignItems="center">
           {children}
         </FlexContainer>
       </FlexContainer>

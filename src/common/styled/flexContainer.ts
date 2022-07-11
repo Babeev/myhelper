@@ -5,7 +5,6 @@ export const FlexContainer = styled.div<{
   top?: string
   right?: string
   column?: boolean
-  margin?: string
   padding?: string
   cursor?: 'pointer' | 'auto'
   isWrap?: boolean
@@ -16,14 +15,19 @@ export const FlexContainer = styled.div<{
   border?: string
   borderRadius?: string
   overflow?: string
+  gap?: string
+  alignItems?: string
+  justifyContent?: string
   hoverOpacity?: number
 }>`
   position: ${({ position }) => position || 'static'};
   top: ${({ top }) => top || 'auto'};
   right: ${({ right }) => right || 'auto'};
   display: flex;
+  align-items: ${({ alignItems }) => alignItems || 'normal'};
+  justify-content: ${({ justifyContent }) => justifyContent || 'flex-start'};
   flex-direction: ${({ column }) => (column ? 'column' : 'row')};
-  margin: ${({ margin }) => margin || '0'};
+  gap: ${({ gap }) => gap || 0};
   padding: ${({ padding }) => padding || '0'};
   cursor: ${({ cursor }) => cursor || 'auto'};
   flex-wrap: ${({ isWrap }) => (isWrap ? 'wrap' : 'no-wrap')};

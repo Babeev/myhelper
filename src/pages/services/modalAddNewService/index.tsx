@@ -62,26 +62,24 @@ export const ModalAddNewService = ({
 
   return (
     <Modal isShow={isShow} onHide={onHide} title="Новая услуга">
-      <FlexContainer margin="auto">
+      <FlexContainer column>
         <Form initialValues={initialValues} validate={validate}>
           {({ values, errors, isFormValid }) => (
-            <>
+            <FlexContainer column gap="0.5rem" padding="0 3rem">
               <Input
                 name="name"
                 label="Название"
                 value={values.name}
                 error={errors.name}
                 cypressName="name"
-                margin="0 auto 0.5rem 0"
               />
 
               <Input
-                name="decription"
+                name="description"
                 label="Описание"
-                value={values.decription}
-                error={errors.decription}
-                cypressName="decription"
-                margin="0 auto 0.5rem 0"
+                value={values.description}
+                error={errors.description}
+                cypressName="description"
               />
 
               <Input
@@ -90,7 +88,6 @@ export const ModalAddNewService = ({
                 value={values.city}
                 error={errors.city}
                 cypressName="city"
-                margin="0 auto 0.5rem 0"
               />
 
               <Input
@@ -99,19 +96,19 @@ export const ModalAddNewService = ({
                 value={values.price}
                 error={errors.price}
                 cypressName="price"
-                margin="0 auto 0.5rem 0"
               />
 
-              <Button
-                color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
-                disabled={!isFormValid}
-                padding="0.5rem"
-                margin="1rem auto 0 auto"
-                onClick={() => onAddDealHandler(values as initialValues)}
-              >
-                Создать услугу
-              </Button>
-            </>
+              <FlexContainer column alignItems="center" padding="0.5rem 0 0 0">
+                <Button
+                  color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                  disabled={!isFormValid}
+                  padding="0.5rem 1rem"
+                  onClick={() => onAddDealHandler(values as initialValues)}
+                >
+                  Создать услугу
+                </Button>
+              </FlexContainer>
+            </FlexContainer>
           )}
         </Form>
       </FlexContainer>

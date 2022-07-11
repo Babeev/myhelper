@@ -1,29 +1,31 @@
-import { DANGER_COLOR, GRAY_COLOR } from 'common/constants'
+import { BACKGROUND_COLOR, DANGER_COLOR, GRAY_COLOR } from 'common/constants'
 import styled from 'styled-components'
 
-export const InputContainer = styled.div<{
-  margin?: string
-  width?: string
-  height?: string
-}>`
+export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: ${({ margin }) => margin || 0};
-  width: ${({ width }) => width || '100%'};
-  height: ${({ height }) => height || 'auto'};
+
+  &:focus-within > label {
+    font-size: 14px;
+    transform: translateY(-100%) translateX(-5px);
+    background: ${BACKGROUND_COLOR};
+    padding: 0 8px;
+    border-radius: 30px;
+    z-index: 2;
+  }
 `
 
 export const InputLabel = styled.label<{
   paddingLeft?: string
-  focused: boolean
   error?: string | null
+  isValueExist?: boolean
 }>`
   position: absolute;
   top: 25%;
   left: ${({ paddingLeft }) => paddingLeft || '0.85rem'};
   transition: all 0.2s ease;
-  z-index: 1;
+  z-index: 0;
 
   white-space: nowrap;
   overflow: hidden;
@@ -32,16 +34,17 @@ export const InputLabel = styled.label<{
 
   color: ${({ error }) => (error ? DANGER_COLOR : GRAY_COLOR)};
 
-  ${({ focused }) =>
-    focused &&
-    `
-        font-size: 13px;
+  ${({ isValueExist }) =>
+    isValueExist
+      ? `
+        font-size: 14px;
         transform: translateY(-100%) translateX(-5px);
-        z-index: 1;
-        background: white;
+        background: ${BACKGROUND_COLOR};
         padding: 0 8px;
         border-radius: 30px;
-      `}
+        z-index: 2;
+        `
+      : ''}
 `
 
 export const StyledInput = styled.input<{
@@ -53,7 +56,7 @@ export const StyledInput = styled.input<{
 }>`
   border: 2px solid ${({ error }) => (error ? DANGER_COLOR : GRAY_COLOR)};
   border-radius: 0.45rem;
-  background-color: #fff;
+  background-color: transparent;
   outline: none;
   padding-top: ${({ paddingTop }) => (paddingTop ? paddingTop : '0.75rem')};
   padding-right: ${({ paddingRight }) =>
@@ -63,5 +66,5 @@ export const StyledInput = styled.input<{
   padding-left: ${({ paddingLeft }) => (paddingLeft ? paddingLeft : '0.9rem')};
   font-size: 1rem;
   transition: all 0.2s ease;
-  z-index: 0;
+  z-index: 1;
 `

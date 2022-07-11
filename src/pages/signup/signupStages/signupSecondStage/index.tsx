@@ -5,6 +5,7 @@ import { Button } from 'common/styled/button'
 import { useCallback } from 'react'
 import { useMemo } from 'react'
 import { phoneNumber, requiredField } from 'common/utils/validators'
+import { FlexContainer } from 'common/styled/flexContainer'
 
 interface SignupSecondStageProps {
   onSubmitHandler: () => void
@@ -32,28 +33,28 @@ export const SignupSecondStage = ({
   return (
     <Form initialValues={initialValues} validate={validate}>
       {({ values, errors, isFormValid }) => (
-        <>
+        <FlexContainer column gap="1rem">
           <Input
             label="Номер телефона"
             name="number"
             value={values.number}
             error={errors.number}
-            margin="0 0 1rem 0"
             cypressName="number"
           />
 
-          <Button
-            type="button"
-            color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
-            margin="1rem auto"
-            padding="0.5rem"
-            disabled={!isFormValid}
-            onClick={onSubmitHandler}
-            data-cy="nextStageButton"
-          >
-            Продолжить
-          </Button>
-        </>
+          <FlexContainer column alignItems="center">
+            <Button
+              type="button"
+              color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+              padding="0.5rem 1rem"
+              disabled={!isFormValid}
+              onClick={onSubmitHandler}
+              data-cy="nextStageButton"
+            >
+              Продолжить
+            </Button>
+          </FlexContainer>
+        </FlexContainer>
       )}
     </Form>
   )

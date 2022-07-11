@@ -1,5 +1,5 @@
-import { StyledForm } from './styled'
 import { memo, ReactElement, SyntheticEvent, useMemo, useState } from 'react'
+import { StyledForm } from './styled'
 
 type Values = Record<string, string | null>
 type Errors = Record<string, string | null>

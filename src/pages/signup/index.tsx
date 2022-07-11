@@ -1,14 +1,14 @@
-import { useAppDispatch, useAppSelector } from 'redux/hooks'
-import { Layout } from 'common/components/layout'
-import { setAccount } from 'redux/accountSlice'
 import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { Layout } from 'common/components/layout'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { setAccount } from 'redux/accountSlice'
 import { useSignupMutation } from 'redux/api/auth'
 import { SignupFirstStage } from './signupStages/signupFirstStage'
 import { SignupSecondStage } from './signupStages/signupSecondStage'
 import { SignupThirdStage } from './signupStages/signupThirdStage'
-import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 
 export const Signup = () => {
   const navigate = useNavigate()
@@ -62,12 +62,7 @@ export const Signup = () => {
     >
       <StyledFlexContainer column width="50%" padding="3rem 0 0 0">
         {stage === 1 ? (
-          <SignupFirstStage
-            linkNavigatePath="/auth/login"
-            linkNavigateText="Уже есть аккаунт?"
-            submitButtonText="Продолжить"
-            onSubmitHandler={() => setStage(2)}
-          />
+          <SignupFirstStage onSubmitHandler={() => setStage(2)} />
         ) : null}
 
         {stage === 2 ? (

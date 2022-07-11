@@ -1,12 +1,12 @@
-import { Layout } from 'common/components/layout'
-import { ProtectedRoute } from 'common/components/protectedRoute'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { Layout } from 'common/components/layout'
+import { ProtectedRoute } from 'common/components/protectedRoute'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { useGetDealsQuery } from 'redux/api/deals'
 import { ModalAddNewService } from './modalAddNewService'
 import { Options } from './options'
 import { ServiceRow } from './serviceRow'
-import { useGetDealsQuery } from 'redux/api/deals'
-import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 
 interface ServicesProps {
   isLoggedIn: boolean

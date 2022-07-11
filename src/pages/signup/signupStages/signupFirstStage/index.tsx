@@ -9,23 +9,15 @@ import { PRIMARY_COLOR, GRAY_COLOR } from 'utils/constants'
 import { requiredField } from 'utils/validators'
 
 interface SignupFirstStageProps {
-  linkNavigatePath: string
-  linkNavigateText: string
-  submitButtonText: string
   onSubmitHandler: () => void
 }
 
 export const SignupFirstStage = memo(
-  ({
-    linkNavigatePath,
-    linkNavigateText,
-    submitButtonText,
-    onSubmitHandler,
-  }: SignupFirstStageProps) => {
+  ({ onSubmitHandler }: SignupFirstStageProps) => {
     const navigate = useNavigate()
 
     const onRouteToSignup = () => {
-      navigate(linkNavigatePath)
+      navigate('/auth/login')
     }
 
     const validate = useCallback((inputName: string, inputValue: string) => {
@@ -91,7 +83,7 @@ export const SignupFirstStage = memo(
               cursor="pointer"
               data-cy="toSignupRoute"
             >
-              {linkNavigateText}
+              Уже есть аккаунт?
             </StyledP>
 
             <StyledFlexContainer column alignItems="center">
@@ -103,7 +95,7 @@ export const SignupFirstStage = memo(
                 onClick={onSubmitHandler}
                 data-cy="nextStageButton"
               >
-                {submitButtonText}
+                Продолжить
               </StyledButton>
             </StyledFlexContainer>
           </StyledFlexContainer>

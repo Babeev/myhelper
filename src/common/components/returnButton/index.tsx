@@ -1,5 +1,5 @@
-import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import styled from 'styled-components'
+import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import arrow from 'assets/icons/arrow-left.svg'
 
 interface ReturnButtonProps {

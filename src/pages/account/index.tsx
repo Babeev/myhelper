@@ -1,8 +1,8 @@
+import { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Layout } from 'common/components/layout'
 import { ProtectedRoute } from 'common/components/protectedRoute'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
-import { useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { AccountForm } from './accountForm'
 
 interface AccountProps {

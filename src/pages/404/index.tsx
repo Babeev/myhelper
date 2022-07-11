@@ -1,6 +1,6 @@
-import { Layout } from 'common/components/layout'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Layout } from 'common/components/layout'
 
 export const NotFound = () => {
   const navigate = useNavigate()

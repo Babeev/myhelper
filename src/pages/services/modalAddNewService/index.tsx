@@ -7,8 +7,8 @@ import { StyledButton } from 'common/styled/styledButton'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { AddDealRequest } from 'types'
 import { useAppSelector } from 'redux/hooks'
-import { requiredField } from 'utils/validators'
 import { useAddDealMutation } from 'redux/api/deals'
+import { requiredField } from 'utils/validators'
 import { GRAY_COLOR, PRIMARY_COLOR } from 'utils/constants'
 
 interface ModalAddNewServiceProps {

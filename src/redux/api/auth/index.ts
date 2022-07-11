@@ -1,4 +1,5 @@
 import { api } from 'redux/api'
+import { Deal } from 'types'
 
 interface SignupRequest {
   firstName: string
@@ -6,9 +7,19 @@ interface SignupRequest {
   middleName: string
 }
 
+interface SignupResponse {
+  fistName: string | null
+  lastName: string | null
+  middleName: string | null
+  login: string | null
+  number: string | null
+  userId: number | null
+  deals: Deal[]
+}
+
 const authEndpoint = api.injectEndpoints({
   endpoints: (build) => ({
-    signup: build.mutation<string, SignupRequest>({
+    signup: build.mutation<SignupResponse, SignupRequest>({
       query: (body) => ({
         url: 'api/add/user',
         method: 'POST',
@@ -18,4 +29,7 @@ const authEndpoint = api.injectEndpoints({
   }),
 })
 
-export const { useSignupMutation } = authEndpoint
+export const {
+  useSignupMutation,
+  endpoints: { signup },
+} = authEndpoint

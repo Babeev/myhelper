@@ -22,4 +22,8 @@ const dealsEndpoint = api.injectEndpoints({
   }),
 })
 
-export const { useGetDealsQuery, useAddDealMutation } = dealsEndpoint
+export const {
+  useGetDealsQuery,
+  useAddDealMutation,
+  endpoints: { getDeals },
+} = dealsEndpoint

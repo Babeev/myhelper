@@ -34,10 +34,9 @@ export const Modal = memo(({ isShow, onHide, title, children }: ModalProps) => {
           e.preventDefault()
           e.stopPropagation()
         }}
+        gap="1rem"
       >
-        <StyledHeader fontSize="1.5rem" margin="0 auto 1rem 0">
-          {title}
-        </StyledHeader>
+        <StyledHeader fontSize="1.5rem">{title}</StyledHeader>
 
         <StyledFlexContainer>{children}</StyledFlexContainer>
       </StyledFlexContainer>

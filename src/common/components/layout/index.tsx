@@ -25,8 +25,11 @@ export const Layout = ({
       )}
 
       <StyledFlexContainer column padding="3rem" width="100%">
-        <StyledFlexContainer padding="0 0 2rem 0">
-          <StyledHeader margin="0 auto 0 0">{title}</StyledHeader>
+        <StyledFlexContainer
+          padding="0 0 2rem 0"
+          justifyContent="space-between"
+        >
+          <StyledHeader>{title}</StyledHeader>
 
           {options}
         </StyledFlexContainer>

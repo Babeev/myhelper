@@ -28,10 +28,13 @@ export const MainLayout = () => {
       backgroundColor={BACKGROUND_COLOR}
       overflow="auto"
     >
-      <StyledFlexContainer backgroundColor="#fff">
+      <StyledFlexContainer
+        backgroundColor="#fff"
+        justifyContent="space-between"
+        padding="2rem"
+      >
         <StyledHeader
           fontSize="3rem"
-          margin="1rem auto 1.5rem 2rem"
           opacity="0.7"
           cursor="pointer"
           onClick={onClickHeaderHandler}
@@ -40,15 +43,16 @@ export const MainLayout = () => {
         </StyledHeader>
 
         {isLoggedIn && (
-          <StyledImg
-            margin="auto 2rem auto auto"
-            width="40px"
-            height="40px"
-            cursor="pointer"
-            hoverOpacity="0.7"
-            src={person}
-            onClick={onClickAccountHandler}
-          />
+          <StyledFlexContainer alignItems="center">
+            <StyledImg
+              width="40px"
+              height="40px"
+              cursor="pointer"
+              hoverOpacity="0.7"
+              src={person}
+              onClick={onClickAccountHandler}
+            />
+          </StyledFlexContainer>
         )}
       </StyledFlexContainer>
 

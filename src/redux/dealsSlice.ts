@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Deal } from 'types'
+import { Deal, DealsSlice } from 'types'
 import { signup } from './api/auth'
 import { getDeals } from './api/deals'
-
-export interface DealsSlice {
-  allDeals: Deal[]
-  myDeals: Deal[]
-}
 
 const initialState: DealsSlice = {
   allDeals: [],

@@ -1,4 +1,4 @@
-import { AddDealRequest, Deal, GetServicesResponse } from 'types'
+import { AddDealRequest, Deal, GetDealsResponse } from 'types'
 import { api } from 'redux/api'
 
 const dealsEndpoint = api.injectEndpoints({
@@ -8,7 +8,7 @@ const dealsEndpoint = api.injectEndpoints({
         url: 'api/deal/all',
         method: 'GET',
       }),
-      transformResponse: (response: GetServicesResponse) => {
+      transformResponse: (response: GetDealsResponse) => {
         return response.deals
       },
     }),

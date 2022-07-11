@@ -1,14 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-export interface AccountSlice {
-  fistName: string | null
-  lastName: string | null
-  middleName: string | null
-  login: string | null
-  number: string | null
-  userId: number | null
-  isLoggedIn: boolean
-}
+import { AccountSlice } from 'types/account'
 
 const initialState: AccountSlice = {
   fistName: null,

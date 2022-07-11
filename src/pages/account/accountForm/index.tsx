@@ -6,7 +6,7 @@ import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
 import { StyledButton } from 'common/styled/styledButton'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
-import { DANGER_COLOR, GRAY_COLOR, PRIMARY_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 import { phoneNumber, requiredField } from 'utils/validators'
 
 export const AccountForm = () => {
@@ -120,7 +120,7 @@ export const AccountForm = () => {
           <StyledFlexContainer justifyContent="space-between">
             <StyledButton
               type="button"
-              color={DANGER_COLOR}
+              color={COLORS.DANGER}
               padding="0.5rem 1rem"
               onClick={onExitHandler}
             >
@@ -129,7 +129,7 @@ export const AccountForm = () => {
 
             <StyledButton
               type="button"
-              color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+              color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
               padding="0.5rem 1rem"
               disabled={!isFormValid}
             >

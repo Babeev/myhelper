@@ -1,5 +1,7 @@
-export const PRIMARY_COLOR = '#0c6dfd'
-export const WARNING_COLOR = '#ffc007'
-export const DANGER_COLOR = '#dc3444'
-export const GRAY_COLOR = '#C5C6C7'
-export const BACKGROUND_COLOR = '#f0f6fa'
+export const COLORS = {
+  PRIMARY: '#0c6dfd',
+  WARNING: '#ffc007',
+  DANGER: '#dc3444',
+  GRAY: '#C5C6C7',
+  BACKGROUND: '#f0f6fa',
+}

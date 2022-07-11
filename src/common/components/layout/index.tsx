@@ -19,7 +19,7 @@ export const Layout = memo(
           <ReturnButton onClickHandler={onReturnHandler} />
         )}
 
-        <StyledFlexContainer column padding="3rem" width="100%">
+        <StyledFlexContainer column padding="2.5rem" width="100%">
           <StyledFlexContainer
             padding="0 0 2rem 0"
             justifyContent="space-between"

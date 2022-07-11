@@ -4,7 +4,7 @@ import { useAppSelector } from 'redux/hooks'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { StyledHeader } from 'common/styled/styledHeader'
 import { StyledImg } from 'common/styled/styledImg'
-import { BACKGROUND_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 import person from 'assets/icons/person-circle.svg'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -25,7 +25,7 @@ export const MainLayout = () => {
     <StyledFlexContainer
       column
       height="100%"
-      backgroundColor={BACKGROUND_COLOR}
+      backgroundColor={COLORS.BACKGROUND}
       overflow="auto"
     >
       <StyledFlexContainer

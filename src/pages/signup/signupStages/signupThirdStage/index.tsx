@@ -6,7 +6,7 @@ import { StyledButton } from 'common/styled/styledButton'
 import { StyledP } from 'common/styled/styledP'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { maxLength, onlyNumbers, requiredField } from 'utils/validators'
-import { PRIMARY_COLOR, GRAY_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 
 interface SignupThirdStageProps {
   onSubmitHandler: () => void
@@ -65,12 +65,12 @@ export const SignupThirdStage = memo(
             />
 
             {counter ? (
-              <StyledP color={GRAY_COLOR}>
+              <StyledP color={COLORS.GRAY}>
                 Отправить код повторно можно через {counter} секунд
               </StyledP>
             ) : (
               <StyledP
-                color={PRIMARY_COLOR}
+                color={COLORS.PRIMARY}
                 cursor="pointer"
                 onClick={onResendHandler}
               >
@@ -85,7 +85,7 @@ export const SignupThirdStage = memo(
             >
               <StyledButton
                 type="button"
-                color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
                 padding="0.5rem 1rem"
                 disabled={!isFormValid}
                 onClick={onSubmitHandler}

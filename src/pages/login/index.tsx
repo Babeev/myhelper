@@ -7,7 +7,7 @@ import { StyledButton } from 'common/styled/styledButton'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { StyledP } from 'common/styled/styledP'
 import { requiredField } from 'utils/validators'
-import { GRAY_COLOR, PRIMARY_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -55,7 +55,7 @@ export const Login = () => {
               />
 
               <StyledP
-                color={PRIMARY_COLOR}
+                color={COLORS.PRIMARY}
                 cursor="pointer"
                 onClick={onSignupRouteHandler}
                 data-cy="toSignupRoute"
@@ -66,7 +66,7 @@ export const Login = () => {
               <StyledFlexContainer justifyContent="space-around">
                 <StyledButton
                   type="button"
-                  color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                  color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
                   disabled={!isFormValid}
                   padding="0.5rem 1rem"
                 >

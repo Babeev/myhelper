@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BACKGROUND_COLOR, DANGER_COLOR, GRAY_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 
 export const InputContainer = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ export const InputContainer = styled.div`
   &:focus-within > label {
     font-size: 14px;
     transform: translateY(-100%) translateX(-5px);
-    background: ${BACKGROUND_COLOR};
+    background: ${COLORS.BACKGROUND};
     padding: 0 8px;
     border-radius: 30px;
     z-index: 2;
@@ -32,14 +32,14 @@ export const InputLabel = styled.label<{
   text-overflow: ellipsis;
   max-width: 90%;
 
-  color: ${({ error }) => (error ? DANGER_COLOR : GRAY_COLOR)};
+  color: ${({ error }) => (error ? COLORS.DANGER : COLORS.GRAY)};
 
   ${({ isValueExist }) =>
     isValueExist
       ? `
         font-size: 14px;
         transform: translateY(-100%) translateX(-5px);
-        background: ${BACKGROUND_COLOR};
+        background: ${COLORS.BACKGROUND};
         padding: 0 8px;
         border-radius: 30px;
         z-index: 2;
@@ -54,7 +54,7 @@ export const StyledInput = styled.input<{
   paddingBottom?: string
   paddingLeft?: string
 }>`
-  border: 2px solid ${({ error }) => (error ? DANGER_COLOR : GRAY_COLOR)};
+  border: 2px solid ${({ error }) => (error ? COLORS.DANGER : COLORS.GRAY)};
   border-radius: 0.45rem;
   background-color: transparent;
   outline: none;

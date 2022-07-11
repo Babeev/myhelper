@@ -5,7 +5,7 @@ import { StyledButton } from 'common/styled/styledButton'
 import { StyledP } from 'common/styled/styledP'
 import { Input } from 'common/components/input'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
-import { PRIMARY_COLOR, GRAY_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 import { requiredField } from 'utils/validators'
 
 interface SignupFirstStageProps {
@@ -78,7 +78,7 @@ export const SignupFirstStage = memo(
             />
 
             <StyledP
-              color={PRIMARY_COLOR}
+              color={COLORS.PRIMARY}
               onClick={onRouteToSignup}
               cursor="pointer"
               data-cy="toSignupRoute"
@@ -89,7 +89,7 @@ export const SignupFirstStage = memo(
             <StyledFlexContainer column alignItems="center">
               <StyledButton
                 type="button"
-                color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
                 padding="0.5rem 1rem"
                 disabled={!isFormValid}
                 onClick={onSubmitHandler}

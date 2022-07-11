@@ -4,7 +4,7 @@ import { Input } from 'common/components/input'
 import { StyledButton } from 'common/styled/styledButton'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { phoneNumber, requiredField } from 'utils/validators'
-import { PRIMARY_COLOR, GRAY_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 
 interface SignupSecondStageProps {
   onSubmitHandler: () => void
@@ -43,7 +43,7 @@ export const SignupSecondStage = memo(
             <StyledFlexContainer column alignItems="center">
               <StyledButton
                 type="button"
-                color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
                 padding="0.5rem 1rem"
                 disabled={!isFormValid}
                 onClick={onSubmitHandler}

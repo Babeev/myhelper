@@ -1,7 +1,7 @@
 import { memo, ReactElement } from 'react'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { StyledHeader } from 'common/styled/styledHeader'
-import { BACKGROUND_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 import { Overlay } from './styled'
 
 interface ModalProps {
@@ -26,7 +26,7 @@ export const Modal = memo(({ isShow, onHide, title, children }: ModalProps) => {
         top="25%"
         right="25%"
         height="auto"
-        backgroundColor={BACKGROUND_COLOR}
+        backgroundColor={COLORS.BACKGROUND}
         borderRadius="30px"
         overflow="auto"
         padding="1rem"

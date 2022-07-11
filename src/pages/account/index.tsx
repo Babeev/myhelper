@@ -19,7 +19,7 @@ export const Account = () => {
         onReturnHandler={onClickReturnHandler}
         title="Профиль"
       >
-        <StyledFlexContainer column width="50%" padding="2rem 0 0 0">
+        <StyledFlexContainer column width="50%" padding="1rem 0 0 0">
           <AccountForm />
         </StyledFlexContainer>
       </Layout>

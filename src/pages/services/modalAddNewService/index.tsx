@@ -9,7 +9,7 @@ import { AddDealRequest } from 'types'
 import { useAppSelector } from 'redux/hooks'
 import { useAddDealMutation } from 'redux/api/deals'
 import { requiredField } from 'utils/validators'
-import { GRAY_COLOR, PRIMARY_COLOR } from 'utils/constants'
+import { COLORS } from 'utils/constants'
 
 interface ModalAddNewServiceProps {
   isShow: boolean
@@ -101,7 +101,7 @@ export const ModalAddNewService = memo(
                 padding="0.5rem 0 0 0"
               >
                 <StyledButton
-                  color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                  color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
                   disabled={!isFormValid}
                   padding="0.5rem 1rem"
                   onClick={() => onAddDealHandler(values as initialValues)}

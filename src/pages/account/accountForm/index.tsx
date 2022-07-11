@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from 'redux/hooks'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { setAccount } from 'redux/accountSlice'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
@@ -13,6 +13,12 @@ export const AccountForm = () => {
   const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
+
+  const firstName = useAppSelector((state) => state.account.fistName)
+  const lastName = useAppSelector((state) => state.account.lastName)
+  const middleName = useAppSelector((state) => state.account.middleName)
+  const login = useAppSelector((state) => state.account.login)
+  const number = useAppSelector((state) => state.account.number)
 
   const validate = useCallback((inputName: string, inputValue: string) => {
     const errors: Record<string, string | null> = {}
@@ -58,13 +64,13 @@ export const AccountForm = () => {
 
   const initialValues = useMemo(
     () => ({
-      firstName: null,
-      lastName: null,
-      middleName: null,
-      login: null,
-      number: null,
+      firstName,
+      lastName,
+      middleName,
+      login,
+      number,
     }),
-    []
+    [firstName, lastName, middleName, login, number]
   )
 
   return (

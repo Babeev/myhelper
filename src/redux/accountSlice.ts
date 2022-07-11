@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AccountSlice } from 'types/account'
+import { signup } from './api/auth'
 
 const initialState: AccountSlice = {
   fistName: null,
@@ -28,6 +29,18 @@ const accountSlice = createSlice({
       state[input] = value
     },
   },
+  extraReducers: (builder) =>
+    builder.addMatcher(signup.matchFulfilled, (state, action) => {
+      const { firstName, lastName, middleName, login, number, userId } =
+        action.payload
+
+      state.fistName = firstName
+      state.lastName = lastName
+      state.middleName = middleName
+      state.login = login
+      state.number = number
+      state.userId = userId
+    }),
 })
 
 const { actions, reducer } = accountSlice

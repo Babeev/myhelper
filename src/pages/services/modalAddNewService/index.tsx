@@ -62,60 +62,58 @@ export const ModalAddNewService = ({
 
   return (
     <Modal isShow={isShow} onHide={onHide} title="Новая услуга">
-      <StyledFlexContainer column>
-        <Form initialValues={initialValues} validate={validate}>
-          {({ values, errors, isFormValid }) => (
-            <StyledFlexContainer column gap="0.5rem" padding="0 3rem">
-              <Input
-                name="name"
-                label="Название"
-                value={values.name}
-                error={errors.name}
-                cypressName="name"
-              />
+      <Form initialValues={initialValues} validate={validate}>
+        {({ values, errors, isFormValid }) => (
+          <StyledFlexContainer column gap="0.5rem" padding="0 3rem">
+            <Input
+              name="name"
+              label="Название"
+              value={values.name}
+              error={errors.name}
+              cypressName="name"
+            />
 
-              <Input
-                name="description"
-                label="Описание"
-                value={values.description}
-                error={errors.description}
-                cypressName="description"
-              />
+            <Input
+              name="description"
+              label="Описание"
+              value={values.description}
+              error={errors.description}
+              cypressName="description"
+            />
 
-              <Input
-                name="city"
-                label="Город"
-                value={values.city}
-                error={errors.city}
-                cypressName="city"
-              />
+            <Input
+              name="city"
+              label="Город"
+              value={values.city}
+              error={errors.city}
+              cypressName="city"
+            />
 
-              <Input
-                name="price"
-                label="Цена"
-                value={values.price}
-                error={errors.price}
-                cypressName="price"
-              />
+            <Input
+              name="price"
+              label="Цена"
+              value={values.price}
+              error={errors.price}
+              cypressName="price"
+            />
 
-              <StyledFlexContainer
-                column
-                alignItems="center"
-                padding="0.5rem 0 0 0"
+            <StyledFlexContainer
+              column
+              alignItems="center"
+              padding="0.5rem 0 0 0"
+            >
+              <StyledButton
+                color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
+                disabled={!isFormValid}
+                padding="0.5rem 1rem"
+                onClick={() => onAddDealHandler(values as initialValues)}
               >
-                <StyledButton
-                  color={isFormValid ? PRIMARY_COLOR : GRAY_COLOR}
-                  disabled={!isFormValid}
-                  padding="0.5rem 1rem"
-                  onClick={() => onAddDealHandler(values as initialValues)}
-                >
-                  Создать услугу
-                </StyledButton>
-              </StyledFlexContainer>
+                Создать услугу
+              </StyledButton>
             </StyledFlexContainer>
-          )}
-        </Form>
-      </StyledFlexContainer>
+          </StyledFlexContainer>
+        )}
+      </Form>
     </Modal>
   )
 }

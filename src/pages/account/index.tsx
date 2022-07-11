@@ -5,11 +5,7 @@ import { ProtectedRoute } from 'common/components/protectedRoute'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { AccountForm } from './accountForm'
 
-interface AccountProps {
-  isLoggedIn: boolean
-}
-
-export const Account = ({ isLoggedIn }: AccountProps) => {
+export const Account = () => {
   const navigate = useNavigate()
 
   const onClickReturnHandler = useCallback(() => {
@@ -17,7 +13,7 @@ export const Account = ({ isLoggedIn }: AccountProps) => {
   }, [navigate])
 
   return (
-    <ProtectedRoute isLoggedIn={isLoggedIn}>
+    <ProtectedRoute>
       <Layout
         isReturnPath={true}
         onReturnHandler={onClickReturnHandler}

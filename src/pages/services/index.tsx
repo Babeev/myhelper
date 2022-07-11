@@ -9,21 +9,18 @@ import { ModalAddNewService } from './modalAddNewService'
 import { Options } from './options'
 import { ServiceRow } from './serviceRow'
 
-interface ServicesProps {
-  isLoggedIn: boolean
-}
-
-export const Services = memo(({ isLoggedIn }: ServicesProps) => {
+export const Services = memo(() => {
   const [isShowAddNewServiceModal, setShowAddNewServiceModal] = useState(false)
   const [dealsPart, setDealsPart] = useState<'all' | 'my'>('all')
+
+  const isLoggedIn = useAppSelector((state) => state.account.isLoggedIn)
+  const allDeals = useAppSelector((state) => state.deals.allDeals)
+  const myDeals = useAppSelector((state) => state.deals.myDeals)
 
   const { isError, error } = useGetDealsQuery(undefined, {
     skip: !isLoggedIn,
     refetchOnMountOrArgChange: true,
   })
-
-  const allDeals = useAppSelector((state) => state.deals.allDeals)
-  const myDeals = useAppSelector((state) => state.deals.myDeals)
 
   const data = useMemo(
     () => (dealsPart === 'all' ? allDeals : myDeals),
@@ -51,7 +48,7 @@ export const Services = memo(({ isLoggedIn }: ServicesProps) => {
   }, [isError, error])
 
   return (
-    <ProtectedRoute isLoggedIn={isLoggedIn}>
+    <ProtectedRoute>
       <Layout
         title="Услуги"
         options={

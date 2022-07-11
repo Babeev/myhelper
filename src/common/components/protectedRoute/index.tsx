@@ -1,14 +1,16 @@
 import { memo, ReactElement, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useAppSelector } from 'redux/hooks'
 
 interface ProtectedRouteProps {
-  isLoggedIn: boolean
   children?: ReactElement | Array<ReactElement | null>
 }
 
 export const ProtectedRoute = memo(
-  ({ isLoggedIn, children }: ProtectedRouteProps): ReactElement => {
+  ({ children }: ProtectedRouteProps): ReactElement => {
+    const isLoggedIn = useAppSelector((state) => state.account.isLoggedIn)
+
     useEffect(() => {
       if (!isLoggedIn) {
         toast.error('Пожалуйста, войдите снова')

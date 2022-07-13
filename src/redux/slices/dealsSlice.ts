@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Deal, DealsSlice } from 'types'
-import { signup } from './api/auth'
-import { getDeals } from './api/deals'
+import { getDeals } from 'redux/api/deals'
+import { getUserInfo } from 'redux/api/user'
 
 const initialState: DealsSlice = {
   allDeals: [],
@@ -22,11 +22,11 @@ const dealsSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addMatcher(signup.matchFulfilled, (state, action) => {
-        state.myDeals = action.payload.deals
-      })
       .addMatcher(getDeals.matchFulfilled, (state, action) => {
         state.allDeals = action.payload
+      })
+      .addMatcher(getUserInfo.matchFulfilled, (state, action) => {
+        state.myDeals = action.payload.placedDeals
       }),
 })
 

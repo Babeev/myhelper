@@ -59,7 +59,7 @@ export const Services = () => {
           />
         }
       >
-        <StyledFlexContainer column gap="1rem" padding="0 0 3rem 0">
+        <StyledFlexContainer width="80%" column gap="1rem" padding="0 0 3rem 0">
           {data?.map((service) => (
             <ServiceRow key={service.id} service={service} />
           ))}

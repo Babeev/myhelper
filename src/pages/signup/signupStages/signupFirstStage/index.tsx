@@ -1,19 +1,21 @@
-import { useCallback, memo, useMemo } from 'react'
+import { useCallback, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Form } from 'common/components/form'
 import { StyledButton } from 'common/styled/styledButton'
 import { StyledP } from 'common/styled/styledP'
 import { Input } from 'common/components/input'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
+import { SignupBody } from 'types'
 import { COLORS } from 'utils/constants'
 import { requiredField } from 'utils/validators'
 
 interface SignupFirstStageProps {
-  onSubmitHandler: () => void
+  initialValues: SignupBody
+  onSubmitHandler: (data: SignupBody) => void
 }
 
 export const SignupFirstStage = memo(
-  ({ onSubmitHandler }: SignupFirstStageProps) => {
+  ({ initialValues, onSubmitHandler }: SignupFirstStageProps) => {
     const navigate = useNavigate()
 
     const onRouteToSignup = () => {
@@ -44,11 +46,6 @@ export const SignupFirstStage = memo(
       return errors
     }, [])
 
-    const initialValues = useMemo(
-      () => ({ firstName: null, lastName: null, middleName: null }),
-      []
-    )
-
     return (
       <Form initialValues={initialValues} validate={validate}>
         {({ values, errors, isFormValid }) => (
@@ -77,6 +74,22 @@ export const SignupFirstStage = memo(
               cypressName="middleName"
             />
 
+            <Input
+              label="Логин"
+              name="login"
+              value={values.login}
+              error={errors.login}
+              cypressName="login"
+            />
+
+            <Input
+              label="Пароль"
+              name="password"
+              value={values.password}
+              error={errors.password}
+              cypressName="password"
+            />
+
             <StyledP
               color={COLORS.PRIMARY}
               onClick={onRouteToSignup}
@@ -92,7 +105,7 @@ export const SignupFirstStage = memo(
                 color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
                 padding="0.5rem 1rem"
                 disabled={!isFormValid}
-                onClick={onSubmitHandler}
+                onClick={() => onSubmitHandler(values)}
                 data-cy="nextStageButton"
               >
                 Продолжить

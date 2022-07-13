@@ -2,7 +2,7 @@ export const requiredField = (value: string | number): string | null => {
   if (value?.toString().length) {
     return null
   }
-  return 'Поле, обязательное для заполнения'
+  return 'Обязательное поле'
 }
 
 export const maxLength =
@@ -16,7 +16,7 @@ export const maxLength =
   }
 
 export const onlyNumbers = <T>(value: T): string | null =>
-  value && isNaN(Number(value)) ? 'Используйте только цифры' : null
+  value && isNaN(Number(value)) ? 'Только цифры' : null
 
 export const phoneNumber = (value: string): string | null => {
   if (value) {

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
-import { setAccount } from 'redux/accountSlice'
+import { clearAccount } from 'redux/slices/accountSlice'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
 import { StyledButton } from 'common/styled/styledButton'
@@ -14,7 +14,7 @@ export const AccountForm = () => {
 
   const navigate = useNavigate()
 
-  const firstName = useAppSelector((state) => state.account.fistName)
+  const firstName = useAppSelector((state) => state.account.firstName)
   const lastName = useAppSelector((state) => state.account.lastName)
   const middleName = useAppSelector((state) => state.account.middleName)
   const login = useAppSelector((state) => state.account.login)
@@ -59,7 +59,8 @@ export const AccountForm = () => {
 
   const onExitHandler = () => {
     navigate('/auth/login')
-    dispatch(setAccount({ input: 'isLoggedIn', value: false }))
+
+    dispatch(clearAccount())
   }
 
   const initialValues = useMemo(

@@ -8,13 +8,36 @@ import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { StyledP } from 'common/styled/styledP'
 import { requiredField } from 'utils/validators'
 import { COLORS } from 'utils/constants'
+import { useGetOAuthTokenMutation } from 'redux/api/auth'
+import { toast } from 'react-toastify'
 
 export const Login = () => {
   const navigate = useNavigate()
 
+  const [getOAuthToken] = useGetOAuthTokenMutation()
+
   const onSignupRouteHandler = () => {
     navigate('/auth/signup')
   }
+
+  const onLoginHandler = (login: string | null, password: string | null) => {
+    const loginPromise = getOAuthToken({
+      login: login || '',
+      password: password || '',
+    }).unwrap()
+
+    toast.promise(loginPromise, {
+      pending: 'Загрузка...',
+      error: 'Произошла ошибка',
+    })
+
+    loginPromise
+      .then(() => {
+        navigate('/services')
+      })
+      .catch((e) => console.log(e))
+  }
+
   const validate = useCallback((inputName: string, inputValue: string) => {
     const errors: Record<string, string | null> = {}
 
@@ -69,6 +92,7 @@ export const Login = () => {
                   color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
                   disabled={!isFormValid}
                   padding="0.5rem 1rem"
+                  onClick={() => onLoginHandler(values.login, values.password)}
                 >
                   Войти
                 </StyledButton>

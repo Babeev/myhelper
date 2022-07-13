@@ -11,6 +11,7 @@ const dealsEndpoint = api.injectEndpoints({
       transformResponse: (response: GetDealsResponse) => {
         return response.deals
       },
+      providesTags: ['Deals'],
     }),
     addDeal: build.mutation<Deal, AddDealRequest>({
       query: (data) => ({
@@ -18,6 +19,7 @@ const dealsEndpoint = api.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Deals', 'UserInfo'],
     }),
   }),
 })

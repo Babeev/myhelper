@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Layout } from 'common/components/layout'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
-import { useAppDispatch, useAppSelector } from 'redux/hooks'
-import { setAccount } from 'redux/accountSlice'
-import { useSignupMutation } from 'redux/api/auth'
+import { SignupBody } from 'types'
+import { useGetOAuthTokenMutation, useSignupMutation } from 'redux/api/auth'
 import { SignupFirstStage } from './signupStages/signupFirstStage'
 import { SignupSecondStage } from './signupStages/signupSecondStage'
 import { SignupThirdStage } from './signupStages/signupThirdStage'
@@ -13,15 +12,17 @@ import { SignupThirdStage } from './signupStages/signupThirdStage'
 export const Signup = () => {
   const navigate = useNavigate()
 
-  const dispatch = useAppDispatch()
-
   const [stage, setStage] = useState(1)
-
-  const firstName = useAppSelector((state) => state.account.fistName)
-  const lastName = useAppSelector((state) => state.account.lastName)
-  const middleName = useAppSelector((state) => state.account.middleName)
+  const [accountData, setAccountData] = useState<SignupBody>({
+    firstName: null,
+    lastName: null,
+    middleName: null,
+    login: null,
+    password: null,
+  })
 
   const [signup] = useSignupMutation()
+  const [getOAuthToken] = useGetOAuthTokenMutation()
 
   const onClickReturnHandler = useCallback(() => {
     if (stage === 1) {
@@ -31,28 +32,39 @@ export const Signup = () => {
     }
   }, [navigate, stage])
 
+  const onSetAccountDataHandler = useCallback((data: Partial<SignupBody>) => {
+    setAccountData((prev) => ({
+      ...prev,
+      ...data,
+    }))
+
+    setStage(2)
+  }, [])
+
   const onSubmitSignupHandler = useCallback(async () => {
-    const promise = signup({
-      firstName: firstName || '',
-      lastName: lastName || '',
-      middleName: middleName || '',
+    const signupPromise = signup(accountData).unwrap()
+    const getTokenPromise = getOAuthToken({
+      login: accountData.login || '',
+      password: accountData.password || '',
     }).unwrap()
 
-    toast.promise(promise, {
+    const allPromises = Promise.all([signupPromise, getTokenPromise])
+
+    toast.promise(allPromises, {
       pending: 'Загрузка...',
       success: 'Регистрация прошла успешно',
       error: 'Произошла ошибка',
     })
 
-    promise
-      .then(() => {
-        dispatch(setAccount({ input: 'isLoggedIn', value: true }))
-        navigate('/services')
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-  }, [signup, firstName, lastName, middleName, dispatch, navigate])
+    try {
+      await signupPromise
+      await getTokenPromise
+
+      navigate('/services')
+    } catch (e) {
+      console.log(e)
+    }
+  }, [signup, getOAuthToken, accountData, navigate])
 
   return (
     <Layout
@@ -62,7 +74,10 @@ export const Signup = () => {
     >
       <StyledFlexContainer column width="50%" padding="3rem 0 0 0">
         {stage === 1 ? (
-          <SignupFirstStage onSubmitHandler={() => setStage(2)} />
+          <SignupFirstStage
+            initialValues={accountData}
+            onSubmitHandler={onSetAccountDataHandler}
+          />
         ) : null}
 
         {stage === 2 ? (

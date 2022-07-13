@@ -16,6 +16,7 @@ export const ServiceRow = memo(({ service }: ServiceRowProps) => {
       cursor="pointer"
       backgroundColor="#fff"
       gap="2rem"
+      justifyContent="space-between"
     >
       <StyledFlexContainer column cursor="pointer" gap="2rem">
         <StyledP fontSize="1.5rem" fontWeight={500} cursor="pointer">

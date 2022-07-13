@@ -8,7 +8,7 @@ import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { AddDealRequest } from 'types'
 import { useAppSelector } from 'redux/hooks'
 import { useAddDealMutation } from 'redux/api/deals'
-import { requiredField } from 'utils/validators'
+import { onlyNumbers, requiredField } from 'utils/validators'
 import { COLORS } from 'utils/constants'
 
 interface ModalAddNewServiceProps {
@@ -28,10 +28,12 @@ export const ModalAddNewService = memo(
     const userId = useAppSelector((state) => state.account.userId)
 
     const onAddDealHandler = async (values: initialValues) => {
+      const date = new Date().toISOString()
+
       const promise = addDeal({
         ...values,
         ownerId: userId,
-        date: '',
+        date: date,
       }).unwrap()
 
       toast.promise(promise, {
@@ -40,7 +42,11 @@ export const ModalAddNewService = memo(
         error: 'Не удалось добавить услугу',
       })
 
-      promise.catch((e) => console.log(e))
+      promise
+        .then(() => {
+          onHide()
+        })
+        .catch((e) => console.log(e))
     }
 
     const validate = useCallback((inputName: string, inputValue: string) => {
@@ -48,7 +54,14 @@ export const ModalAddNewService = memo(
 
       if (inputName === 'name') {
         const error = requiredField(inputValue)
+
         errors.name = error
+      }
+
+      if (inputName === 'price') {
+        const error = onlyNumbers(inputValue)
+
+        errors.price = error
       }
       return errors
     }, [])
@@ -101,10 +114,11 @@ export const ModalAddNewService = memo(
                 padding="0.5rem 0 0 0"
               >
                 <StyledButton
+                  type="button"
                   color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
                   disabled={!isFormValid}
                   padding="0.5rem 1rem"
-                  onClick={() => onAddDealHandler(values as initialValues)}
+                  onClick={() => onAddDealHandler(values)}
                 >
                   Создать услугу
                 </StyledButton>

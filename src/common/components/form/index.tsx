@@ -1,23 +1,44 @@
-import { memo, ReactElement, SyntheticEvent, useMemo, useState } from 'react'
+import {
+  memo,
+  ReactElement,
+  SyntheticEvent,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { StyledForm } from './styled'
 
-type Values = Record<string, string | null>
 type Errors = Record<string, string | null>
-type ChildrenProps = {
-  values: Values
+
+type ChildrenProps<InitialValuesType> = {
+  values: InitialValuesType
   errors: Errors
   isFormValid: boolean
 }
 
-interface FormProps {
-  initialValues: Values
+interface FormProps<InitialValuesType> {
+  initialValues: InitialValuesType
   validate: (name: string, value: string) => Errors
-  children: ({ values, errors }: ChildrenProps) => ReactElement
+  children: ({
+    values,
+    errors,
+    isFormValid,
+  }: ChildrenProps<InitialValuesType>) => ReactElement
 }
 
-export const Form = memo(({ initialValues, validate, children }: FormProps) => {
-  const [values, setValues] = useState<Values>(initialValues)
+const genericMemo: <T>(component: T) => T = memo
+
+function GenericForm<InitialValuesType>({
+  initialValues,
+  validate,
+  children,
+}: FormProps<InitialValuesType>) {
+  const [values, setValues] = useState<InitialValuesType>(initialValues)
   const [errors, setErrors] = useState<Errors>({})
+
+  useEffect(() => {
+    setValues(initialValues)
+  }, [initialValues])
 
   const onChangeHandler = (event: SyntheticEvent<HTMLFormElement>) => {
     const input = event.target as HTMLInputElement
@@ -45,4 +66,6 @@ export const Form = memo(({ initialValues, validate, children }: FormProps) => {
       {children({ errors, values, isFormValid })}
     </StyledForm>
   )
-})
+}
+
+export const Form = genericMemo(GenericForm) as typeof GenericForm

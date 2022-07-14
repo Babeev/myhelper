@@ -17,13 +17,12 @@ export const InputContainer = styled.div`
 `
 
 export const InputLabel = styled.label<{
-  paddingLeft?: string
   error?: string | null
   isValueExist?: boolean
 }>`
   position: absolute;
   top: 25%;
-  left: ${({ paddingLeft }) => paddingLeft || '0.85rem'};
+  left: 0.85rem;
   transition: all 0.2s ease;
   z-index: 0;
 
@@ -49,21 +48,15 @@ export const InputLabel = styled.label<{
 
 export const StyledInput = styled.input<{
   error: string | null
-  paddingTop?: string
-  paddingRight?: string
-  paddingBottom?: string
-  paddingLeft?: string
 }>`
   border: 2px solid ${({ error }) => (error ? COLORS.DANGER : COLORS.GRAY)};
   border-radius: 0.45rem;
   background-color: transparent;
   outline: none;
-  padding-top: ${({ paddingTop }) => (paddingTop ? paddingTop : '0.75rem')};
-  padding-right: ${({ paddingRight }) =>
-    paddingRight ? paddingRight : '0.25rem'};
-  padding-bottom: ${({ paddingBottom }) =>
-    paddingBottom ? paddingBottom : '0.75rem'};
-  padding-left: ${({ paddingLeft }) => (paddingLeft ? paddingLeft : '0.9rem')};
+  padding-top: 0.75rem;
+  padding-right: 0.25rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.9rem;
   font-size: 1rem;
   transition: all 0.2s ease;
   z-index: 1;

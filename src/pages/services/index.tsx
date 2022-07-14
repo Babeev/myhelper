@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
+import { useGetUserInfoQuery } from 'redux/api/user'
+import { useGetDealsQuery } from 'redux/api/deals'
+import { useAppSelector } from 'redux/hooks'
 import { Layout } from 'common/components/layout'
 import { ProtectedRoute } from 'common/components/protectedRoute'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
-import { useGetDealsQuery } from 'redux/api/deals'
-import { useAppSelector } from 'redux/hooks'
 import { ModalAddNewService } from './modalAddNewService'
-import { Options } from './options'
+import { ServicesOptions } from './servicesOptions'
 import { ServiceRow } from './serviceRow'
 
 export const Services = () => {
@@ -17,10 +18,23 @@ export const Services = () => {
   const allDeals = useAppSelector((state) => state.deals.allDeals)
   const myDeals = useAppSelector((state) => state.deals.myDeals)
 
-  const { isError, error } = useGetDealsQuery(undefined, {
-    skip: !isLoggedIn,
-    refetchOnMountOrArgChange: true,
-  })
+  const { isError: isGetDealsError, error: getDealsError } = useGetDealsQuery(
+    undefined,
+    {
+      skip: !isLoggedIn,
+      refetchOnMountOrArgChange: true,
+    }
+  )
+
+  const userId = useAppSelector((state) => state.account.userId)
+
+  const { isError: isGetUserError, error: getUserError } = useGetUserInfoQuery(
+    userId,
+    {
+      skip: !userId,
+      refetchOnMountOrArgChange: true,
+    }
+  )
 
   const data = useMemo(
     () => (dealsPart === 'all' ? allDeals : myDeals),
@@ -40,19 +54,27 @@ export const Services = () => {
   }, [])
 
   useEffect(() => {
-    if (isError) {
+    if (isGetDealsError) {
       toast.error('Не удалось получить список услуг')
 
-      console.log(error)
+      console.log(getDealsError)
     }
-  }, [isError, error])
+  }, [isGetDealsError, getDealsError])
+
+  useEffect(() => {
+    if (isGetUserError) {
+      toast.error('Не удалось получить данные пользователя')
+
+      console.log(getUserError)
+    }
+  }, [isGetUserError, getUserError])
 
   return (
     <ProtectedRoute>
       <Layout
         title="Услуги"
         options={
-          <Options
+          <ServicesOptions
             dealsPart={dealsPart}
             onChangeDealsPartHandler={onChangeDealsPartHandler}
             onOpenHandler={onOpenAddNewServiceModal}

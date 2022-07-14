@@ -4,14 +4,18 @@ import { StyledImg } from 'common/styled/styledImg'
 import { StyledP } from 'common/styled/styledP'
 import plus from 'assets/icons/plus-circle.svg'
 
-interface OptionsProps {
+interface ServicesOptionsProps {
   onOpenHandler: () => void
   onChangeDealsPartHandler: (part: 'all' | 'my') => void
   dealsPart: 'all' | 'my'
 }
 
-export const Options = memo(
-  ({ onOpenHandler, onChangeDealsPartHandler, dealsPart }: OptionsProps) => {
+export const ServicesOptions = memo(
+  ({
+    onOpenHandler,
+    onChangeDealsPartHandler,
+    dealsPart,
+  }: ServicesOptionsProps) => {
     return (
       <StyledFlexContainer
         padding="1rem"

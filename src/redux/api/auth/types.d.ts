@@ -1,3 +1,11 @@
+export interface SignupRequest {
+  firstName: string | null
+  lastName: string | null
+  middleName: string | null
+  login: string | null
+  password: string | null
+}
+
 export interface GetOAuthTokenRequest {
   login: string
   password: string

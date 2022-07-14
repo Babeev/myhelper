@@ -1,13 +1,15 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { usePutUserUpdateMutation } from 'redux/api/user'
 import { clearAccount } from 'redux/slices/accountSlice'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
 import { StyledButton } from 'common/styled/styledButton'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { COLORS } from 'utils/constants'
-import { phoneNumber, requiredField } from 'utils/validators'
+import { accountDataValidate } from 'utils/validators/accountDataValidate'
 
 export const AccountForm = () => {
   const dispatch = useAppDispatch()
@@ -18,50 +20,10 @@ export const AccountForm = () => {
   const lastName = useAppSelector((state) => state.account.lastName)
   const middleName = useAppSelector((state) => state.account.middleName)
   const login = useAppSelector((state) => state.account.login)
-  const number = useAppSelector((state) => state.account.number)
+  const phoneNumber = useAppSelector((state) => state.account.phoneNumber)
+  const userId = useAppSelector((state) => state.account.userId)
 
-  const validate = useCallback((inputName: string, inputValue: string) => {
-    const errors: Record<string, string | null> = {}
-
-    if (inputName === 'firstName') {
-      const error = requiredField(inputValue)
-      errors.firstName = error
-    }
-
-    if (inputName === 'lastName') {
-      const error = requiredField(inputValue)
-
-      errors.lastName = error
-    }
-
-    if (inputName === 'middleName') {
-      const error = requiredField(inputValue)
-
-      errors.middleName = error
-    }
-
-    if (inputName === 'login') {
-      const error = requiredField(inputValue)
-
-      errors.login = error
-    }
-
-    if (inputName === 'number') {
-      const validateResults = [phoneNumber, requiredField]
-        ?.map((validate) => validate(inputValue))
-        .filter((error) => error)
-
-      errors.number = validateResults[0] || ''
-    }
-
-    return errors
-  }, [])
-
-  const onExitHandler = () => {
-    navigate('/auth/login')
-
-    dispatch(clearAccount())
-  }
+  const [putUserUpdate] = usePutUserUpdateMutation()
 
   const initialValues = useMemo(
     () => ({
@@ -69,16 +31,40 @@ export const AccountForm = () => {
       lastName,
       middleName,
       login,
-      number,
+      phoneNumber,
+      password: null,
     }),
-    [firstName, lastName, middleName, login, number]
+    [firstName, lastName, middleName, login, phoneNumber]
   )
 
+  const onExitHandler = () => {
+    navigate('/auth/login')
+
+    dispatch(clearAccount())
+  }
+
+  const onSaveHandler = (values: typeof initialValues) => {
+    const promise = putUserUpdate({ ...values, id: userId }).unwrap()
+
+    toast.promise(promise, {
+      pending: 'Сохранение...',
+      success: 'Сохранено',
+      error: 'Произошла ошибка',
+    })
+
+    promise.catch((e) => console.log(e))
+  }
+
   return (
-    <Form initialValues={initialValues} validate={validate}>
+    <Form
+      initialValues={initialValues}
+      validate={accountDataValidate}
+      onSubmit={onSaveHandler}
+    >
       {({ values, errors, isFormValid }) => (
         <StyledFlexContainer column gap="1rem">
           <Input
+            required
             label="Имя"
             name="firstName"
             value={values.firstName}
@@ -87,6 +73,7 @@ export const AccountForm = () => {
           />
 
           <Input
+            required
             label="Фамилия"
             name="lastName"
             value={values.lastName}
@@ -95,6 +82,7 @@ export const AccountForm = () => {
           />
 
           <Input
+            required
             label="Отчество"
             name="middleName"
             value={values.middleName}
@@ -103,6 +91,7 @@ export const AccountForm = () => {
           />
 
           <Input
+            required
             label="Логин"
             name="login"
             value={values.login}
@@ -111,10 +100,20 @@ export const AccountForm = () => {
           />
 
           <Input
+            label="Новый пароль"
+            name="password"
+            type="password"
+            value={values.password}
+            error={errors.password}
+            cypressName="password"
+          />
+
+          <Input
+            required
             label="Номер телефона"
-            name="number"
-            value={values.number}
-            error={errors.number}
+            name="phoneNumber"
+            value={values.phoneNumber}
+            error={errors.phoneNumber}
             cypressName="number"
           />
 
@@ -129,7 +128,7 @@ export const AccountForm = () => {
             </StyledButton>
 
             <StyledButton
-              type="button"
+              type="submit"
               color={isFormValid ? COLORS.PRIMARY : COLORS.GRAY}
               padding="0.5rem 1rem"
               disabled={!isFormValid}

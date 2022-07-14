@@ -1,5 +1,5 @@
 import { api } from 'redux/api'
-import { UserInfoResponse } from './types'
+import { UserInfoResponse, UserUpdateRequest } from './types'
 
 const userEndpoint = api.injectEndpoints({
   endpoints: (build) => ({
@@ -9,10 +9,19 @@ const userEndpoint = api.injectEndpoints({
       }),
       providesTags: ['UserInfo'],
     }),
+    putUserUpdate: build.mutation<void, UserUpdateRequest>({
+      query: ({ id, ...userUpdate }) => ({
+        url: `api/user/${id}/update/`,
+        method: 'PUT',
+        body: userUpdate,
+      }),
+      invalidatesTags: ['UserInfo'],
+    }),
   }),
 })
 
 export const {
   useGetUserInfoQuery,
+  usePutUserUpdateMutation,
   endpoints: { getUserInfo },
 } = userEndpoint

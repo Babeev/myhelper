@@ -39,7 +39,7 @@ export const MainLayout = () => {
           cursor="pointer"
           onClick={onClickHeaderHandler}
         >
-          MyHelper
+          myhelper
         </StyledHeader>
 
         {isLoggedIn && (

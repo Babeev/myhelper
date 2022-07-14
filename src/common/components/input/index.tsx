@@ -6,6 +6,8 @@ interface InputProps {
   label: string
   name: string
   value: string | number | null | undefined
+  type?: string
+  required?: boolean
   cypressName?: string
   onChange?: (value: string) => void
   onFocus?: (event: FocusEvent<HTMLInputElement>) => void
@@ -18,6 +20,8 @@ export const Input = memo(
     label,
     value,
     name,
+    type,
+    required,
     cypressName,
     onChange,
     onFocus,
@@ -40,6 +44,8 @@ export const Input = memo(
         </InputLabel>
 
         <StyledInput
+          required={required}
+          type={type}
           value={value == null ? '' : value}
           error={error}
           name={name}

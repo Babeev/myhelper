@@ -3,7 +3,7 @@ export interface AccountSliceState {
   lastName: string | null
   middleName: string | null
   login: string | null
-  number: string | null
+  phoneNumber: string | null
   userId: number | null
   isLoggedIn: boolean
 }

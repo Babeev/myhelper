@@ -1,59 +1,46 @@
-import { memo, useMemo } from 'react'
-import { toast } from 'react-toastify'
+import { memo, useCallback } from 'react'
+import { Deal } from 'types'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
 import { Modal } from 'common/components/modal'
 import { StyledButton } from 'common/styled/styledButton'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
-import { useAppSelector } from 'redux/hooks'
-import { useAddDealMutation } from 'redux/api/deals'
 import { COLORS } from 'utils/constants'
 import { validate } from 'utils/validators/serviceDataValidate'
+import { useEditDealMutation } from 'redux/api/deals'
+import { toast } from 'react-toastify'
 
-interface ModalAddNewServiceProps {
+interface ModalEditServiceProps {
+  initialValues: Deal
   isShow: boolean
   onHide: () => void
 }
 
-export const ModalAddNewService = memo(
-  ({ isShow, onHide }: ModalAddNewServiceProps) => {
-    const [addDeal] = useAddDealMutation()
+export const ModalEditService = memo(
+  ({ initialValues, isShow, onHide }: ModalEditServiceProps) => {
+    const [editDeal] = useEditDealMutation()
 
-    const userId = useAppSelector((state) => state.account.userId)
+    const onSubmitHandler = useCallback(
+      (values: Deal) => {
+        const promise = editDeal(values).unwrap()
 
-    const initialValues = useMemo(
-      () => ({ name: null, description: null, city: null, price: null }),
-      []
+        toast.promise(promise, {
+          pending: 'Сохранение...',
+          success: 'Сохранено',
+          error: 'Произошла ошибка',
+        })
+
+        promise.then(() => onHide()).catch((e) => console.log(e))
+      },
+      [editDeal, onHide]
     )
 
-    const onAddDealHandler = async (values: typeof initialValues) => {
-      const date = new Date().toISOString()
-
-      const promise = addDeal({
-        ...values,
-        ownerId: userId,
-        date: date,
-      }).unwrap()
-
-      toast.promise(promise, {
-        pending: 'Загрузка...',
-        success: 'Услуга добавлена',
-        error: 'Не удалось добавить услугу',
-      })
-
-      promise
-        .then(() => {
-          onHide()
-        })
-        .catch((e) => console.log(e))
-    }
-
     return (
-      <Modal isShow={isShow} onHide={onHide} title="Новая услуга">
+      <Modal isShow={isShow} onHide={onHide} title="Редактировать услугу">
         <Form
           initialValues={initialValues}
           validate={validate}
-          onSubmit={onAddDealHandler}
+          onSubmit={onSubmitHandler}
         >
           {({ values, errors, isFormValid }) => (
             <StyledFlexContainer column gap="0.5rem" padding="0 3rem">
@@ -104,7 +91,7 @@ export const ModalAddNewService = memo(
                   disabled={!isFormValid}
                   padding="0.5rem 1rem"
                 >
-                  Создать услугу
+                  Сохранить
                 </StyledButton>
               </StyledFlexContainer>
             </StyledFlexContainer>

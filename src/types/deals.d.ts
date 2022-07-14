@@ -13,16 +13,3 @@ export interface Deal {
   price: number
   subscribers: number[]
 }
-
-export interface AddDealRequest {
-  city: string | null
-  date: string | null
-  description: string | null
-  name: string | null
-  ownerId: number | null
-  price: string | null
-}
-
-export interface GetDealsResponse {
-  deals: Deal[]
-}

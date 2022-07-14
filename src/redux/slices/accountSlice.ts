@@ -8,7 +8,7 @@ const initialState: AccountSliceState = {
   lastName: null,
   middleName: null,
   login: null,
-  number: null,
+  phoneNumber: null,
   userId: null,
   isLoggedIn: false,
 }
@@ -25,7 +25,7 @@ const accountSlice = createSlice({
       state.lastName = null
       state.middleName = null
       state.login = null
-      state.number = null
+      state.phoneNumber = null
       state.isLoggedIn = false
     },
   },
@@ -40,12 +40,14 @@ const accountSlice = createSlice({
         localStorage.setItem('token', access_token)
       })
       .addMatcher(getUserInfo.matchFulfilled, (state, action) => {
-        const { firstName, lastName, middleName, login, id } = action.payload
+        const { firstName, lastName, middleName, login, phoneNumber, id } =
+          action.payload
 
         state.firstName = firstName
         state.lastName = lastName
         state.middleName = middleName
-        state.login = login || null
+        state.login = login
+        state.phoneNumber = phoneNumber
         state.userId = id
       }),
 })

@@ -1,17 +1,22 @@
 import jwtDecode from 'jwt-decode'
 import { api } from 'redux/api'
-import { DecodedAccountToken, SignupBody } from 'types'
-import { GetOAuthTokenRequest, GetOAuthTokenResponse } from './types'
+import { DecodedAccountToken } from 'types'
+import {
+  GetOAuthTokenRequest,
+  GetOAuthTokenResponse,
+  SignupRequest,
+} from './types'
 
 const authEndpoint = api.injectEndpoints({
   endpoints: (build) => ({
-    signup: build.mutation<void, SignupBody>({
+    signup: build.mutation<void, SignupRequest>({
       query: (body) => ({
         url: 'api/add/user',
         method: 'POST',
         body,
       }),
     }),
+
     getOAuthToken: build.mutation<GetOAuthTokenResponse, GetOAuthTokenRequest>({
       query: ({ login, password }) => ({
         url: `/oauth/token?username=${login}&password=${password}&grant_type=password`,
@@ -23,9 +28,11 @@ const authEndpoint = api.injectEndpoints({
       transformResponse: (response: GetOAuthTokenResponse) => {
         const token = response.access_token
         const decodedToken = jwtDecode<DecodedAccountToken>(token)
-        const stringId = decodedToken.authorities[1]
-        const parsedStringId = stringId.split(':')
-        const id = parsedStringId[1]
+        const stringId = decodedToken.authorities.find((elem) =>
+          /id/.test(elem)
+        )
+        const parsedStringId = stringId?.split(':')
+        const id = parsedStringId?.[1]
 
         return {
           ...response,

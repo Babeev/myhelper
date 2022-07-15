@@ -68,7 +68,7 @@ export const Service = () => {
         <StyledFlexContainer width="80%" column gap="1rem" padding="0 0 3rem 0">
           <StyledP>{data?.description || 'Нет данных'}</StyledP>
 
-          {userId !== data?.ownerId && (
+          {data && userId !== data?.ownerId && (
             <StyledFlexContainer>
               <StyledButton
                 color={COLORS.PRIMARY}

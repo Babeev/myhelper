@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const StyledFlexContainer = styled.div<{
   position?: string
   top?: string
-  right?: string
+  left?: string
   column?: boolean
   padding?: string
   cursor?: 'pointer' | 'auto'
@@ -22,7 +22,7 @@ export const StyledFlexContainer = styled.div<{
 }>`
   position: ${({ position }) => position || 'static'};
   top: ${({ top }) => top || 'auto'};
-  right: ${({ right }) => right || 'auto'};
+  left: ${({ left }) => left || 'auto'};
   display: flex;
   align-items: ${({ alignItems }) => alignItems || 'normal'};
   justify-content: ${({ justifyContent }) => justifyContent || 'flex-start'};

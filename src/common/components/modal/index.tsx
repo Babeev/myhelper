@@ -24,7 +24,7 @@ export const Modal = memo(({ isShow, onHide, title, children }: ModalProps) => {
         column
         position="fixed"
         top="25%"
-        right="25%"
+        left="35%"
         height="auto"
         backgroundColor={COLORS.BACKGROUND}
         borderRadius="30px"

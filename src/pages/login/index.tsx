@@ -78,6 +78,7 @@ export const Login = () => {
 
               <Input
                 required
+                type="password"
                 name="password"
                 label="Пароль"
                 value={values.password}

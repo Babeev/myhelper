@@ -10,6 +10,16 @@ const userEndpoint = api.injectEndpoints({
       providesTags: ['UserInfo'],
     }),
 
+    getUserAvatar: build.query<Blob | JSON, void>({
+      query: () => ({
+        url: 'api/user/avatar',
+        responseHandler: (response) => {
+          return response.blob()
+        },
+      }),
+      providesTags: ['UserAvatar'],
+    }),
+
     putUserUpdate: build.mutation<void, UserUpdateRequest>({
       query: ({ id, ...userUpdate }) => ({
         url: `api/user/${id}/update/`,
@@ -25,6 +35,15 @@ const userEndpoint = api.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+
+    postUserAvatar: build.mutation<void, FormData>({
+      query: (data) => ({
+        url: 'api/user/avatar',
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['UserAvatar'],
+    }),
   }),
 })
 
@@ -32,5 +51,7 @@ export const {
   useGetUserInfoQuery,
   usePutUserUpdateMutation,
   useDeleteUserMutation,
-  endpoints: { getUserInfo },
+  usePostUserAvatarMutation,
+  useGetUserAvatarQuery,
+  endpoints: { getUserInfo, getUserAvatar },
 } = userEndpoint

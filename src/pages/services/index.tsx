@@ -18,6 +18,8 @@ export const Services = () => {
   const allDeals = useAppSelector((state) => state.deals.allDeals)
   const myDeals = useAppSelector((state) => state.deals.myDeals)
 
+  const userId = useAppSelector((state) => state.account.userId)
+
   const { isError: isGetDealsError, error: getDealsError } = useGetDealsQuery(
     undefined,
     {
@@ -25,8 +27,6 @@ export const Services = () => {
       refetchOnMountOrArgChange: true,
     }
   )
-
-  const userId = useAppSelector((state) => state.account.userId)
 
   const { isError: isGetUserError, error: getUserError } = useGetUserInfoQuery(
     userId,

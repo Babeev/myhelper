@@ -1,11 +1,10 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { useAppSelector } from 'redux/hooks'
+import { Avatar } from 'common/components/avatar'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { StyledHeader } from 'common/styled/styledHeader'
-import { StyledImg } from 'common/styled/styledImg'
 import { COLORS } from 'utils/constants'
-import person from 'assets/icons/person-circle.svg'
 import 'react-toastify/dist/ReactToastify.css'
 
 export const MainLayout = () => {
@@ -43,15 +42,13 @@ export const MainLayout = () => {
         </StyledHeader>
 
         {isLoggedIn && (
-          <StyledFlexContainer alignItems="center">
-            <StyledImg
-              width="40px"
-              height="40px"
-              cursor="pointer"
-              hoverOpacity="0.7"
-              src={person}
-              onClick={onClickAccountHandler}
-            />
+          <StyledFlexContainer
+            alignItems="center"
+            borderRadius="50%"
+            cursor="pointer"
+            onClick={onClickAccountHandler}
+          >
+            <Avatar isEditable={false} width="50px" height="50px" />
           </StyledFlexContainer>
         )}
       </StyledFlexContainer>

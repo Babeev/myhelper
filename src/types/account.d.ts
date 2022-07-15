@@ -6,6 +6,7 @@ export interface AccountSliceState {
   phoneNumber: string | null
   userId: number | null
   isLoggedIn: boolean
+  avatarSrc: string | null
 }
 
 export interface DecodedAccountToken {

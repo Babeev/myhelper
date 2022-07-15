@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getOAuthToken } from 'redux/api/auth'
-import { getUserInfo } from 'redux/api/user'
+import { getUserAvatar, getUserInfo } from 'redux/api/user'
 import { AccountSliceState } from 'types'
 
 const initialState: AccountSliceState = {
@@ -11,6 +11,7 @@ const initialState: AccountSliceState = {
   phoneNumber: null,
   userId: null,
   isLoggedIn: false,
+  avatarSrc: null,
 }
 
 const accountSlice = createSlice({
@@ -27,6 +28,7 @@ const accountSlice = createSlice({
       state.login = null
       state.phoneNumber = null
       state.isLoggedIn = false
+      state.avatarSrc = null
     },
   },
   extraReducers: (builder) =>
@@ -49,6 +51,13 @@ const accountSlice = createSlice({
         state.login = login
         state.phoneNumber = phoneNumber
         state.userId = id
+      })
+      .addMatcher(getUserAvatar.matchFulfilled, (state, action) => {
+        const blob = action.payload
+
+        if (blob instanceof Blob) {
+          state.avatarSrc = URL.createObjectURL(blob)
+        }
       }),
 })
 

@@ -15,3 +15,8 @@ export interface SubscribeDealRequest {
   dealId: number | null
   subscriberId: number | null
 }
+
+export interface UnsubscribeDealRequest {
+  dealId: number | null
+  subscriberId: number | null
+}

@@ -8,5 +8,5 @@ export const Overlay = styled.div`
   width: 100vw;
   opacity: 0.2;
   background-color: #000;
-  z-index: 0;
+  z-index: 3;
 `

@@ -26,6 +26,7 @@ export const ReturnButton = memo(({ onClickHandler }: ReturnButtonProps) => {
       column
       height="100%"
       padding="0 1rem"
+      zIndex={1}
     >
       <Img src={arrow} onClick={onClickHandler} />
     </StyledFlexContainer>

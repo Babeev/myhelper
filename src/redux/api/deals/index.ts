@@ -1,6 +1,11 @@
 import { api } from 'redux/api'
 import { Deal } from 'types'
-import { AddDealRequest, GetDealsResponse, SubscribeDealRequest } from './types'
+import {
+  AddDealRequest,
+  GetDealsResponse,
+  SubscribeDealRequest,
+  UnsubscribeDealRequest,
+} from './types'
 
 const dealsEndpoint = api.injectEndpoints({
   endpoints: (build) => ({
@@ -37,6 +42,7 @@ const dealsEndpoint = api.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Deal'],
     }),
 
     editDeal: build.mutation<void, Deal>({
@@ -53,6 +59,23 @@ const dealsEndpoint = api.injectEndpoints({
       }),
       invalidatesTags: ['Deal'],
     }),
+
+    unsubscribeDeal: build.mutation<void, UnsubscribeDealRequest>({
+      query: (data) => ({
+        url: '/api/unsubscribe/deal',
+        method: 'DELETE',
+        body: data,
+      }),
+      invalidatesTags: ['Deal'],
+    }),
+
+    deleteDeal: build.mutation<void, number | null>({
+      query: (id) => ({
+        url: `api/deal/${id}/delete`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Deals', 'UserInfo'],
+    }),
   }),
 })
 
@@ -62,5 +85,7 @@ export const {
   useAddDealMutation,
   useSubscribeDealMutation,
   useEditDealMutation,
+  useUnsubscribeDealMutation,
+  useDeleteDealMutation,
   endpoints: { getDeals },
 } = dealsEndpoint

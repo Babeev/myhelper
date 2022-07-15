@@ -1,15 +1,20 @@
 import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { useGetOAuthTokenMutation } from 'redux/api/auth'
 import { Form } from 'common/components/form'
 import { Input } from 'common/components/input'
 import { Layout } from 'common/components/layout'
 import { StyledButton } from 'common/styled/styledButton'
 import { StyledFlexContainer } from 'common/styled/styledFlexContainer'
 import { StyledP } from 'common/styled/styledP'
-import { composeValidator, minMaxLength, requiredField } from 'utils/validators'
+import {
+  composeValidator,
+  minMaxLength,
+  onlyLatinLetters,
+  requiredField,
+} from 'utils/validators'
 import { COLORS } from 'utils/constants'
-import { useGetOAuthTokenMutation } from 'redux/api/auth'
-import { toast } from 'react-toastify'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -44,7 +49,8 @@ export const Login = () => {
     const errors: Record<string, string | null> = {}
 
     if (inputName === 'login') {
-      const error = requiredField(inputValue)
+      const validator = composeValidator([requiredField, onlyLatinLetters])
+      const error = validator(inputValue)
 
       errors.login = error
     }

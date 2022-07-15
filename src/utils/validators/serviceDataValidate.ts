@@ -23,7 +23,7 @@ export const validate = (inputName: string, inputValue: string) => {
   }
 
   if (inputName === 'city') {
-    const validator = composeValidator([requiredField])
+    const validator = composeValidator([requiredField, minMaxLength(5, 200)])
     const error = validator(inputValue)
 
     errors.city = error

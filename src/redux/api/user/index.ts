@@ -9,6 +9,7 @@ const userEndpoint = api.injectEndpoints({
       }),
       providesTags: ['UserInfo'],
     }),
+
     putUserUpdate: build.mutation<void, UserUpdateRequest>({
       query: ({ id, ...userUpdate }) => ({
         url: `api/user/${id}/update/`,
@@ -17,11 +18,19 @@ const userEndpoint = api.injectEndpoints({
       }),
       invalidatesTags: ['UserInfo'],
     }),
+
+    deleteUser: build.mutation<void, number | null>({
+      query: (id) => ({
+        url: `api/user/${id}/delete`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
 export const {
   useGetUserInfoQuery,
   usePutUserUpdateMutation,
+  useDeleteUserMutation,
   endpoints: { getUserInfo },
 } = userEndpoint

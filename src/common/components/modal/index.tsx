@@ -35,6 +35,7 @@ export const Modal = memo(({ isShow, onHide, title, children }: ModalProps) => {
           e.stopPropagation()
         }}
         gap="1rem"
+        zIndex={4}
       >
         <StyledHeader fontSize="1.5rem">{title}</StyledHeader>
 

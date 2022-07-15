@@ -3,6 +3,7 @@ import {
   minMaxLength,
   phoneNumber,
   composeValidator,
+  onlyLatinLetters,
 } from 'utils/validators'
 
 export const accountDataValidate = (inputName: string, inputValue: string) => {
@@ -30,7 +31,8 @@ export const accountDataValidate = (inputName: string, inputValue: string) => {
   }
 
   if (inputName === 'login') {
-    const error = requiredField(inputValue)
+    const validator = composeValidator([requiredField, onlyLatinLetters])
+    const error = validator(inputValue)
 
     errors.login = error
   }

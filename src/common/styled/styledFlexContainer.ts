@@ -19,6 +19,7 @@ export const StyledFlexContainer = styled.div<{
   alignItems?: string
   justifyContent?: string
   hoverOpacity?: number
+  zIndex?: number
 }>`
   position: ${({ position }) => position || 'static'};
   top: ${({ top }) => top || 'auto'};
@@ -40,6 +41,7 @@ export const StyledFlexContainer = styled.div<{
   border: ${({ border }) => border || 'none'};
   border-radius: ${({ borderRadius }) => borderRadius || 0};
   overflow: ${({ overflow }) => overflow || 'visible'};
+  z-index: ${({ zIndex }) => zIndex || 0};
 
   &:hover {
     opacity: ${({ hoverOpacity }) => hoverOpacity || 1};

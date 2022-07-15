@@ -26,7 +26,7 @@ export const ServiceRow = memo(({ service }: ServiceRowProps) => {
       justifyContent="space-between"
       onClick={onRouteService}
     >
-      <StyledFlexContainer column cursor="pointer" gap="2rem">
+      <StyledFlexContainer width="80%" column cursor="pointer" gap="2rem">
         <StyledP fontSize="1.5rem" fontWeight={500} cursor="pointer">
           {service.name}
         </StyledP>

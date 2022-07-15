@@ -27,6 +27,14 @@ export const minMaxLength =
 export const onlyNumbers = <T>(value: T): string | null =>
   value && isNaN(Number(value)) ? 'Только цифры' : null
 
+export const onlyLatinLetters = (value: string) => {
+  if (/[а-яА-Я]/gm.test(value)) {
+    return 'Можно только латинские буквы'
+  }
+
+  return null
+}
+
 export const phoneNumber = (value: string): string | null => {
   if (value) {
     const testBeginning = /^((\+7)|8){1}/gm.test(value)

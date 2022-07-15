@@ -11,5 +11,5 @@ export interface Deal {
   name: string
   ownerId: number
   price: number
-  subscribers: number[]
+  subscribers?: number[]
 }

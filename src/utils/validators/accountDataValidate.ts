@@ -9,21 +9,21 @@ export const accountDataValidate = (inputName: string, inputValue: string) => {
   const errors: Record<string, string | null> = {}
 
   if (inputName === 'firstName') {
-    const validator = composeValidator([requiredField, minMaxLength(5, 30)])
+    const validator = composeValidator([requiredField, minMaxLength(1, 30)])
     const error = validator(inputValue)
 
     errors.firstName = error
   }
 
   if (inputName === 'lastName') {
-    const validator = composeValidator([requiredField, minMaxLength(5, 30)])
+    const validator = composeValidator([requiredField, minMaxLength(1, 30)])
     const error = validator(inputValue)
 
     errors.lastName = error
   }
 
   if (inputName === 'middleName') {
-    const validator = composeValidator([requiredField, minMaxLength(5, 30)])
+    const validator = composeValidator([requiredField, minMaxLength(1, 30)])
     const error = validator(inputValue)
 
     errors.middleName = error
